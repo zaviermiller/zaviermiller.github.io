@@ -27,4 +27,15 @@ export default {
   .v-application {
     background-color: var(--v-background-base) !important;
   }
+
+html {
+    overflow: auto !important;
+    /* scrollbar-width: none; */
+    /* -ms-overflow-style: none; */
+  }
+  
+  html::-webkit-scrollbar {
+    /* width: 0;
+    height: 0; */
+  }
 </style>

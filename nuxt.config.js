@@ -12,13 +12,13 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: "https://fonts.googleapis.com/css2?family=Aleo&family=Chakra+Petch:wght@400;500&family=Inter:wght@600&family=JetBrains+Mono:wght@400;500&display=swap" }
     ]
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    'assets/fonts.css',
-    'assets/colors.scss'
+    '@/assets/colors.scss'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -80,4 +80,5 @@ export default {
   generate: {
     fallback: "404.html"
   },
+  target: "static",
 }
