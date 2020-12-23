@@ -1,8 +1,8 @@
 <template>
   <v-app dark>
     <AppBar />
-    <v-main class="mx-12 px-12" >
-      <v-container>
+    <v-main class="mx-md-12 px-md-12" >
+      <v-container fluid>
         <nuxt />
       </v-container>
     </v-main>

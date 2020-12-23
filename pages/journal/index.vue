@@ -1,7 +1,7 @@
 <template>
 <v-row class="justify-center pt-8">
   <v-col cols="12" class="text-center pb-8">
-  <h1 style="font-family: 'Chakra Petch' !important;" class="text-h2">Journal</h1>
+  <h1 style="font-family: 'Chakra Petch' !important;" class="text-h3 text-md-h2">Journal</h1>
   </v-col>
   <BlogPostThumbnail v-for="post in posts" :key="post.title" :post="post" class="slide" style="transition: .5s ease-out;" />
   

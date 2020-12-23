@@ -1,7 +1,7 @@
 <template>
 <div>
     <Particles
-    style="position: absolute; width: 100%; left: 0;"
+    style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;"
       id="tsparticles"
       :options="{
             background: false,
@@ -76,10 +76,13 @@
         }"
     />
     <v-row class="justify-center">
-      <v-col cols="10" class="pl-12 pt-12" id="repel">
-        <h1 style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600; margin-top: 15%;" class="text-h1 heading slide">Zavier Miller</h1>
-        <h3 style="font-family: 'Chakra Petch' !important;" class="text-h3 grey--text text--lighten-2 mb-12 subheading slide">software developer and student</h3>
-        <v-btn outlined class="slideY" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false">Check out what I'm up to</v-btn>
+      <v-col cols="12" class="pl-12 pt-12" id="repel">
+        <h1 style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600; margin-top: 15%;" class="text-h2 text-sm-h1 heading slide">Zavier Miller</h1>
+        <h3 style="font-family: 'Chakra Petch' !important;" class="text-h4 text-sm-h3 grey--text text--lighten-2 mb-12 subheading slide">software developer and student</h3>
+        <v-btn v-if="$vuetify.breakpoint.smAndUp" outlined class="slideY" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false">Check out what I'm up to</v-btn>
+      </v-col>
+      <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly">
+        <v-btn outlined block class="slideY" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false">Check out what I'm up to</v-btn>
       </v-col>
       <!-- <v-col cols="6" class="pt-12 pl-12" style="margin-top: 7%;">
         <v-card class="mt-12 ml-12 pt-12" style="border-radius: 15px !important;" width="600" height="400" elevation="6">
@@ -93,7 +96,7 @@
           </v-card-text>
         </v-card>
       </v-col> -->
-      <v-col cols="3" style="position: absolute; bottom: 0px;">
+      <v-col cols="12" style="position: absolute; bottom: 0px;">
         <v-card-actions>
           <v-spacer />
         <v-btn icon x-large class="mx-2" href="https://www.github.com/zaviermiller" :ripple="false">
