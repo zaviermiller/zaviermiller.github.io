@@ -77,9 +77,9 @@
     />
     <v-row class="justify-center">
       <v-col cols="10" class="pl-12 pt-12" id="repel">
-        <h1 style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600; margin-top: 15%;" class="text-h1">Zavier Miller</h1>
-        <h3 style="font-family: 'Chakra Petch' !important;" class="text-h3 grey--text text--lighten-2 mb-12">software developer and student</h3>
-        <v-btn outlined style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false">Check out what I'm up to</v-btn>
+        <h1 style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600; margin-top: 15%;" class="text-h1 heading slide">Zavier Miller</h1>
+        <h3 style="font-family: 'Chakra Petch' !important;" class="text-h3 grey--text text--lighten-2 mb-12 subheading slide">software developer and student</h3>
+        <v-btn outlined class="slideY" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false">Check out what I'm up to</v-btn>
       </v-col>
       <!-- <v-col cols="6" class="pt-12 pl-12" style="margin-top: 7%;">
         <v-card class="mt-12 ml-12 pt-12" style="border-radius: 15px !important;" width="600" height="400" elevation="6">
@@ -114,11 +114,31 @@
 
 <script>
 export default {
+  async mounted() {
+    if (process.browser) {
+      var slide = await (document.getElementsByClassName("slide"))
+      var btn = await document.getElementsByClassName("slideY")[0]
+      let timer = window.setInterval(() => {
+        if (!slide.length) {
+          clearInterval(timer)
+          window.setTimeout(() => {
+            btn.classList.remove("slideY")
+          }, 500)
+          return
+        }
+        var el = slide[0]
+        el.classList.remove("slide")
+      }, 150)
+  }
 
+  }
 }
 </script>
 
 <style>
+.v-btn--outlined {
+    transition: .4s ease-out !important;
+}
   .v-btn:hover, .v-btn::before, .v-btn:active {
     background-color: transparent;
     text-shadow: 0 0 4px;
@@ -126,15 +146,29 @@ export default {
   .heading {
     font-family: 'Chakra Petch' !important;
     letter-spacing: -.05em !important;
+    transition: .5s ease-out !important;
+    position: relative;
   }
 
   .subheading {
     font-family: 'Chakra Petch' !important; 
     font-weight: 400; 
     letter-spacing: -.05em !important;
+    transition: .5s ease-out;
+    position: relative;
   }
 
   .v-divider {
     border-width: 1px;
+  }
+
+  .slide {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .slideY {
+    opacity: 0;
+    transform: translateY(20px);
   }
 </style>

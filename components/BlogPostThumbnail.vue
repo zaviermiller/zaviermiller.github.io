@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12" class="text-center py-2">
-        <NuxtLink class="text-subtitle-1 font-weight-regular primary--text link" style="font-family: 'JetBrains Mono' !important; text-transform: none; text-decoration: none;" :to="`/posts/${slug}`">
+        <NuxtLink class="text-subtitle-1 font-weight-regular primary--text link" style="font-family: 'JetBrains Mono' !important; text-transform: none; text-decoration: none;" :to="`/journal/${slug}`">
             <span :class="`${color}--text`" style="text-transform: capitalize;">[{{post.category}}]</span>
             {{ post.title }}
         </NuxtLink>
