@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Aleo&family=Chakra+Petch:wght@400;500&family=Inter:wght@600&family=JetBrains+Mono:ital,wght@0,400;1,500&display=swap');
+
+html {
+    overflow: auto !important;
+    /* scrollbar-width: none; */
+    /* -ms-overflow-style: none; */
+  }
+  
+  html::-webkit-scrollbar {
+    /* width: 0;
+    height: 0; */
+  }
