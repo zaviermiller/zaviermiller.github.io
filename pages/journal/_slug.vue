@@ -1,7 +1,8 @@
 <template>
 <v-row class="justify-center pt-8">
-  <v-col cols="12" lg="8" xl="7" class="text-center">
+  <v-col cols="12" md="8" xl="6" class="text-center">
   <h1 style="font-family: 'Chakra Petch' !important;" class="text-h2 mb-8 grey--text text--lighten-2">{{post.title}}</h1>
+  <p style="font-family: 'JetBrains Mono'; color: #999;">Posted {{post.created}} -- by Zavier Miller (duh) in <span :class="`text-capitalize ${color}--text`">{{post.category}}</span></p>
   <v-divider class="my-6" width="50%" style="margin-left: -25%; left: 50%; position: relative; border-width: 2px; border-color: #999;" />
   <nuxt-content :document="post" />
   </v-col>
@@ -9,6 +10,13 @@
 </template>
 
 <script>
+const COLORS = {
+    tech: 'light-blue',
+    personal: 'text--accent-3 green',
+    school: 'deep-purple',
+    ML: 'deep-orange'
+}
+
 export default {
   components: {
   },
@@ -27,6 +35,11 @@ export default {
     pres.forEach(pre => {
         pre.classList.add("elevation-12")
     })
+  },
+  computed: {
+  color() {
+    return COLORS[this.post.category]
+  }
   }
 }
 </script>
@@ -58,7 +71,7 @@ export default {
     font-family: 'Aleo';
     margin-top: 10px;
     font-size: 17px;
-    color: #bdbdbd;
+    color: #d2d2d2;
 }
 
 .nuxt-content strong {
@@ -72,6 +85,13 @@ export default {
     color: #bdbdbd !important;
     text-shadow: none;
     margin: 40px 0;
+}
+
+.nuxt-content ul {
+  font-family: 'Aleo';
+    margin-top: 10px;
+    font-size: 17px;
+    color: #bdbdbd;
 }
 
 /* TODO: FOOTNOTE */

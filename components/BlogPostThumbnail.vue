@@ -15,7 +15,8 @@
 const COLORS = {
     tech: 'light-blue',
     personal: 'text--accent-3 green',
-    school: 'deep-purple'
+    school: 'deep-purple',
+    ML: 'deep-orange'
 }
 
 const TOTAL_LEN = 60;

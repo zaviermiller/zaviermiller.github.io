@@ -21,7 +21,8 @@ export default {
     }
   },
   async mounted() {
-    this.posts = await this.$content().sortBy('created', 'desc').fetch()
+    this.posts = await this.$content().fetch()
+    this.posts.sort((a, b) => { return Date.parse(a.created) < Date.parse(b.created) })
 
     if (process.browser) {
         var slide = await (document.getElementsByClassName("slide"))
