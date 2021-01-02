@@ -5,7 +5,7 @@ export default {
   async mounted() {
     if (process.browser) {
 
-      initMetaballs(this.$refs.metaball, this.options)
+      // initMetaballs(this.$refs.metaball, this.options)
 
       // animation
       var slide = await (document.getElementsByClassName("slide"))
@@ -42,7 +42,7 @@ export default {
 
 <template>
 <div>
-    <!-- <Particles
+    <Particles
     style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;"
       id="tsparticles"
       :options="{
@@ -116,8 +116,8 @@ export default {
             },
             detectRetina: true
         }"
-    /> -->
-    <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas>
+    />
+    <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
     <v-row class="justify-center">
       <v-col cols="12" class="pl-12 pt-12" id="repel">
         <h1 style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600; margin-top: 15%;" class="text-h2 text-sm-h1 heading slide">Zavier Miller</h1>
