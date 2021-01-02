@@ -6,9 +6,9 @@
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
-    "generate": "nuxt-ts generate",
+    "generate": "nuxt-ts generate && cp CNAME dist/CNAME",
     "test": "jest",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup && cp CNAME dist/CNAME"
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxt/content": "^1.9.0",
