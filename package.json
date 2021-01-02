@@ -15,6 +15,7 @@
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
     "core-js": "^3.6.5",
+    "metaballs-js": "^2.0.0",
     "nuxt": "^2.14.6",
     "particles.vue": "^2.1.11",
     "push-dir": "^0.4.1"

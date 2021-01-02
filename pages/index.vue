@@ -1,6 +1,48 @@
+<script>
+import initMetaballs from "metaballs-js";
+
+export default {
+  async mounted() {
+    if (process.browser) {
+
+      initMetaballs(this.$refs.metaball, this.options)
+
+      // animation
+      var slide = await (document.getElementsByClassName("slide"))
+      var btn = await document.getElementsByClassName("slideY")[0]
+      let timer = window.setInterval(() => {
+        if (!slide.length) {
+          clearInterval(timer)
+          window.setTimeout(() => {
+            btn.classList.remove("slideY")
+          }, 500)
+          return
+        }
+        var el = slide[0]
+        el.classList.remove("slide")
+      }, 150)
+    }
+
+  },
+  computed: {
+    options() {
+      return {
+        numMetaballs: 20,
+        minRadius: 10,
+        maxRadius: 25,
+        speed: 6.0,
+        color: '#cccccc00',
+        backgroundColor: "#1A1D28",
+        useDevicePixelRatio: true
+      }
+    }
+  }
+}
+</script>
+
 <template>
 <div>
-    <Particles
+    <!-- <Particles
     style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;"
       id="tsparticles"
       :options="{
@@ -74,7 +116,8 @@
             },
             detectRetina: true
         }"
-    />
+    /> -->
+    <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas>
     <v-row class="justify-center">
       <v-col cols="12" class="pl-12 pt-12" id="repel">
         <h1 style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600; margin-top: 15%;" class="text-h2 text-sm-h1 heading slide">Zavier Miller</h1>
@@ -114,29 +157,6 @@
     </v-row>
   </div>
 </template>
-
-<script>
-export default {
-  async mounted() {
-    if (process.browser) {
-      var slide = await (document.getElementsByClassName("slide"))
-      var btn = await document.getElementsByClassName("slideY")[0]
-      let timer = window.setInterval(() => {
-        if (!slide.length) {
-          clearInterval(timer)
-          window.setTimeout(() => {
-            btn.classList.remove("slideY")
-          }, 500)
-          return
-        }
-        var el = slide[0]
-        el.classList.remove("slide")
-      }, 150)
-  }
-
-  }
-}
-</script>
 
 <style>
 .v-btn--outlined {
