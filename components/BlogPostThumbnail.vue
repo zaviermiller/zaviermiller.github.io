@@ -12,12 +12,7 @@
 </template>
 
 <script>
-const COLORS = {
-    tech: 'light-blue',
-    personal: 'text--accent-3 green',
-    school: 'deep-purple',
-    ML: 'deep-orange'
-}
+import { computedColors } from "@/mixins/colors.js"
 
 const TOTAL_LEN = 60;
 
@@ -29,9 +24,10 @@ export default {
             default: null,
         }
     },
+    mixins: [computedColors],
     computed: {
         color() {
-            return COLORS[this.post.category]
+            return this.colors[this.post.category]
         },
         dots() {
             return ".".repeat(TOTAL_LEN - this.post.title.length - this.post.category.length - 3)

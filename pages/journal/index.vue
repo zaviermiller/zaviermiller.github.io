@@ -4,27 +4,37 @@
   <h1 style="font-family: 'Chakra Petch' !important;" class="text-h3 text-md-h2">Journal</h1>
   </v-col>
   <BlogPostThumbnail v-for="post in posts" :key="post.title" :post="post" class="slide" style="transition: .5s ease-out;" />
-  
 </v-row>
 </template>
 
 <script>
 import BlogPostThumbnail from "@/components/BlogPostThumbnail.vue"
+import ZLoader from '../../components/ZLoader.vue'
+
+import {mapMutations, mapGetters} from "vuex"
 
 export default {
   components: {
-    BlogPostThumbnail
+    BlogPostThumbnail,
   },
   data() {
     return {
-      posts: []
+      posts: [],
     }
   },
+  created() {
+    },
   async mounted() {
     this.posts = await this.$content().fetch()
     this.posts.sort((a, b) => { return Date.parse(a.created) < Date.parse(b.created) })
-
-    if (process.browser) {
+    this.postSlide()
+    // this.$emit("loadstop")
+  },
+  computed: {
+  },
+  methods: {
+    async postSlide() {
+      if (process.browser) {
         var slide = await (document.getElementsByClassName("slide"))
         let timer = window.setInterval(() => {
           if (!slide.length) {
@@ -34,6 +44,7 @@ export default {
           var el = slide[0]
           el.classList.remove("slide")
         }, 150)
+    }
     }
   }
 }

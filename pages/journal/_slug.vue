@@ -1,25 +1,26 @@
 <template>
 <v-row class="justify-center pt-8">
   <v-col cols="12" md="8" xl="6" class="text-center">
-  <h1 style="font-family: 'Chakra Petch' !important;" class="text-h2 mb-8 grey--text text--lighten-2">{{post.title}}</h1>
-  <p style="font-family: 'JetBrains Mono'; color: #999;">Posted {{post.created}} -- by Zavier Miller (duh) in <span :class="`text-capitalize ${color}--text`">{{post.category}}</span></p>
-  <v-divider class="my-6" width="50%" style="margin-left: -25%; left: 50%; position: relative; border-width: 2px; border-color: #999;" />
-  <nuxt-content :document="post" />
+    <h1 style="font-family: 'Chakra Petch' !important;" class="text-h2 mb-8 grey--text text--lighten-2">{{post.title}}</h1>
+    <p style="font-family: 'JetBrains Mono'; color: #999;">Posted {{post.created}} -- by Zavier Miller (duh) in <span :class="`text-capitalize ${color}--text`">{{post.category}}</span></p>
+    <dash-seperator class="my-6" width="60%" style="margin-left: -30%; left: 50%; position: relative; border-width: 2px; border-color: #999;" />
+    <v-col cols="12" class="ma-0 pa-0 text-left">
+      <a @click="$router.go(-1)" style="font-size: 15px; font-family: 'JetBrains Mono';">&lt;- Back</a>
+    </v-col>
+    <nuxt-content :document="post" />
   </v-col>
 </v-row>
 </template>
 
 <script>
-const COLORS = {
-    tech: 'light-blue',
-    personal: 'text--accent-3 green',
-    school: 'deep-purple',
-    ML: 'deep-orange'
-}
+import { computedColors } from "@/mixins/colors.js"
+import DashSeperator from '../../components/DashSeperator.vue'
 
 export default {
   components: {
+    DashSeperator
   },
+  mixins: [computedColors],
   data() {
     return {
       post: {}
@@ -38,7 +39,7 @@ export default {
   },
   computed: {
   color() {
-    return COLORS[this.post.category]
+    return this.colors[this.post.category]
   }
   }
 }
@@ -98,10 +99,6 @@ export default {
 
 a {
     text-decoration: none;
-}
-
-a:hover {
-    text-shadow: 0 0 4px;
 }
 
 code > span {

@@ -3,22 +3,34 @@
     <AppBar />
     <v-main class="mx-md-12 px-md-12" >
       <v-container fluid>
-        <nuxt />
+        <v-fade-transition hide-on-leave>
+          <nuxt v-show="!loading"/>
+        </v-fade-transition>
       </v-container>
     </v-main>
+    <v-fade-transition>
+      <ZLoader :size="60" center v-if="loading"/>
+    </v-fade-transition>
   </v-app>
 </template>
 
 <script>
 import AppBar from "@/components/AppBar.vue";
+import ZLoader from '../components/ZLoader.vue';
+
+import { mapGetters } from "vuex"
 
 export default {
   components: {
-    AppBar
+    AppBar,
+    ZLoader
   },
   data () {
     return {
     }
+  },
+  computed: {
+    ...mapGetters({loading: 'load/loading'})
   }
 }
 </script>
@@ -28,8 +40,13 @@ export default {
     background-color: var(--v-background-base) !important;
   }
 
+  a:hover {
+    text-shadow: 0 0 4px;
+}
+
 html {
     overflow: auto !important;
+    overflow-x: hidden !important;
     /* scrollbar-width: none; */
     /* -ms-overflow-style: none; */
   }

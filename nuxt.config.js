@@ -1,4 +1,5 @@
-import colors from 'vuetify/es5/util/colors'
+
+import GithubOutline from "./components/icons/GithubOutline"
 
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -17,7 +18,10 @@ export default {
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
       { rel: "manifest", href: "/site.webmanifest" }
-    ]
+    ],
+    // scripts: [
+    //   { src: "./util/wasm_exec.js" }
+    // ],
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -57,29 +61,24 @@ export default {
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
+    optionsPath: "./plugins/vuetify.js",
     customVariables: ['~/assets/variables.scss'],
-    theme: {
-      options: {
-        customProperties: true,
-      },
-      dark: true,
-      themes: {
-        dark: {
-          background: "#1A1D28",
-          primary: colors.amber.darken1,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+    treeShake: true,
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    extend(config, { isDev, isClient }) {
+      // ..
+      config.module.rules.push({
+        test: /\.wasm$/,
+        loaders: ['wasm-loader']
+      })
+      // Sets webpack's mode to development if `isDev` is true.
+      if (isDev) {
+        config.mode = 'development'
+      }
+    }
   },
   generate: {
     fallback: "404.html"
