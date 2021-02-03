@@ -49,7 +49,6 @@ export default {
             btns.forEach(btn => { btn.classList.remove("slideY") })
             window.setInterval(() => {
               this.showJournal = !this.showJournal
-              console.log(document.getElementsByClassName("slide"))
             }, 4000)
           }, 500)
           return
@@ -73,7 +72,7 @@ export default {
       }
     },
     computedNum() {
-      if (process.browser) return window.innerWidth > 800 ? 200 : 50
+      if (process.browser) return window.innerWidth > 800 ? 200 : 75
       return null
     }
   }
@@ -81,17 +80,17 @@ export default {
 </script>
 
 <template>
-<div :style="$vuetify.breakpoint.smAndDown ? 'overflow: hidden !important;' : ''">
+<div>
     <boids :num="computedNum" >
       <template>
     <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
     <v-row :class="`justify-center ${ $vuetify.breakpoint.smAndDown ? '' : 'pl-12'}`">
       <v-col cols="12" class="pl-12 pt-12" id="repel">
-        <p style="margin-top: 15%; mb-12">
-          <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h2 text-sm-h1 heading slide canvasContent">Zavier Miller</span>
+        <p :style="`${$vuetify.breakpoint.smAndDown ? 'margin-top: 40%;' : 'margin-top: 15%;'} mb-12`">
+          <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h3 text-sm-h1 heading slide canvasContent">Zavier Miller</span>
         </p>
-        <p class="mb-12">
-          <span style="font-family: 'Chakra Petch' !important;" class="text-h4 text-sm-h3 grey--text text--lighten-2 subheading slide canvasContent">software developer and student</span>
+        <p class="mb-md-12">
+          <span style="font-family: 'Chakra Petch' !important;" class="text-h5 text-sm-h3 grey--text text--lighten-2 subheading slide canvasContent">software developer and student</span>
         </p>
         <transition v-if="$vuetify.breakpoint.smAndUp" name="glitch">
           <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
@@ -99,7 +98,7 @@ export default {
         </transition>
       </v-col>
           <!-- <v-btn outlined class="glitch" style="text-transform: none !important; font-family: 'JetBrains Mono'; " tile color="primary" to="/projects" :ripple="false"  data-text="Check out what I'm thinking">Check out what I'm thinking</v-btn> -->
-      <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly" >
+      <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly">
         <transition name="glitch">
           <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
           <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>

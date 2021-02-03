@@ -1,6 +1,6 @@
 <template>
 <div class="parent">
-        <!-- <span class="primary--text" :style="`font-family: 'JetBrains Mono'; ${ $vuetify.breakpoint.smAndDown ? '' : 'position: absolute; bottom: 20px; right: 20px;'}`">FPS: {{fps}}</span> -->
+        <span class="grey--text canvasContent" :style="`font-family: 'JetBrains Mono'; ${ $vuetify.breakpoint.smAndDown ? 'position: absolute; bottom: 0px; left: 20px; font-size: 13px;' : 'position: absolute; bottom: 20px; right: 20px;'}`">FPS: {{fps}}</span>
         <canvas id="content" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" width="100%" height="100%" />
         <slot :content-id="'canvasContent'" ></slot>
     </div>
@@ -25,7 +25,8 @@ let nearbyData
 
 var onBoids = []
 
-var mouseX, mouseY
+var mouseX = -1
+var mouseY = -1
 
 var fps = 1;
 var times = [];
@@ -93,6 +94,15 @@ export default {
             mouseX = e.offsetX
             mouseY = e.offsetY
         }
+        this.canvas.ondrag = (e) => {
+            console.log("drag")
+            mouseX = e.offsetX
+            mouseY = e.offsetY
+        }
+        this.canvas.ontouchmove = (e) => {
+            mouseX = e.offsetX
+            mouseY = e.offsetY
+        }
 
         // register new boid on click
         let hold;
@@ -145,10 +155,10 @@ export default {
             // reset canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-            for (let b of boundaries) {
-                // console.log(b)
-                this.ctx.rect(b.left, b.top, b.right - b.left, b.bottom - b.top)
-            }
+            // for (let b of boundaries) {
+            //     // console.log(b)
+            //     this.ctx.rect(b.left, b.top, b.right - b.left, b.bottom - b.top)
+            // }
 
 
             for(let boid of flock) {
@@ -180,12 +190,12 @@ export default {
         },
         drawBoid(boid, ctx) {
             boid.angle = Math.atan2(boid.dy, boid.dx) - (90 * Math.PI / 180)
-            boid.on = ((boid.on && Math.random() > .95) || (!boid.on && Math.random() > .7)) ? !boid.on : boid.on
+            boid.on = ((boid.on && Math.random() > .99) || (!boid.on && Math.random() > .8)) ? !boid.on : boid.on
 
             ctx.translate(boid.x, boid.y);
             ctx.rotate(boid.angle);
             ctx.translate(-boid.x, -boid.y);
-            ctx.fillStyle = boid.on ? this.$vuetify.theme.themes.dark.primary : "#ccc"
+            ctx.fillStyle = boid.on ? this.$vuetify.theme.themes.dark.primary : "#666"
             ctx.shadowColor = ctx.fillStyle
             ctx.shadowBlur = boid.on ? 4 : 0;
             ctx.font = '15px "JetBrains Mono"';
@@ -239,7 +249,7 @@ export default {
             let localNum = 0
 
             // centering vars
-            const centerFactor = .01
+            const centerFactor = .008
             let centerX = 0
             let centerY = 0
 
@@ -374,15 +384,18 @@ export default {
             }
         },
         targetMouse(boid) {
-            const targetFactor = .1
+            const targetFactor = .00018
+            
+            if (mouseX < 0 && mouseY < 0) return
 
             var targetDx = mouseX - boid.x
             var targetDy = mouseY - boid.y
 
             // console.log(targetDx, targetDy)
 
-            // boid.dx += targetDx * targetFactor
-            // boid.dy += targetDy * targetFactor
+            boid.dx += targetDx * targetFactor
+            boid.dy += targetDy * targetFactor
+            // console.log(boid)
         },
         normalizeSpeed(boid) {
             const speedLimit = 5
@@ -406,7 +419,6 @@ export default {
         updateBoundaries() {
             var contentArr = document.getElementsByClassName("canvasContent")
             if(contentArr.length !== boundaries.length) {
-                console.log("new boundary detected")
                 boundaries = []
                 contentArr.forEach((el) => {
                     this.registerBoundary(el.getBoundingClientRect())
