@@ -1,5 +1,6 @@
 <template>
-    <div class="parent">
+<div class="parent">
+        <span class="primary--text">FPS: {{fps}}</span>
         <canvas id="content" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" width="100%" height="100%" />
         <slot :content-id="'canvasContent'" ></slot>
     </div>
@@ -11,6 +12,7 @@
     FOLLOWED FROM https://github.com/beneater/boids/blob/master/boids.js, THANKS FOR THE STARTING POINT MR. BEN!! :D
 
 */
+const MAX_BOIDS = 250
 const VIEW_DIST = 75
 const VIEW_ANGLE = 120
 
@@ -22,6 +24,20 @@ var boundaries = []
 let nearbyData
 
 var onBoids = []
+
+var mouseX, mouseY
+
+var fps = 1;
+var times = [];
+var getFps = function (timestamp) {
+    while (times.length > 0 && times[0] <= timestamp - 1000) {
+        times.shift();
+    }
+    times.push(timestamp);
+    fps = times.length;
+    // console.log(fps);
+    return fps
+}
 
 function newBitset(length) {
     // create empty 'bitset' with all zeroes
@@ -46,13 +62,14 @@ export default {
             default: 50
         }
     },
+    // most the data for the boids dont need to AND SHOULDNT be reactive
+    // so i am going to refactor most of these variables out
     data: () => ({
         canvas: null,
         canvasOffset: [0,0], // x, y
         ctx: null,
-        mouseX: null,
-        mouseY: null,
-        looper: 0
+        looper: 0,
+        fps: 0,
     }),
     mounted() {
         this.canvas = document.getElementById("content")
@@ -73,8 +90,8 @@ export default {
 
         // register mouse pos updates
         this.canvas.onmousemove = (e) => {
-            this.mouseX = e.offsetX
-            this.mouseY = e.offsetY
+            mouseX = e.offsetX
+            mouseY = e.offsetY
         }
 
         // register new boid on click
@@ -82,15 +99,18 @@ export default {
         let touch;
         this.canvas.onmousedown = (e) => {
             hold = setInterval(() => {
-                this.mouseX = e.offsetX
-                this.mouseY = e.offsetY
+                mouseX = e.offsetX
+                mouseY = e.offsetY
                 flock.push(this.newBoid(e.offsetX, e.offsetY, flock.length))
+                // while (flock.length > MAX_BOIDS) {
+                //     flock.shift()
+                // }
             }, 50)
         }
         this.canvas.ontouchstart = (e) => {
             touch = setInterval(() => {
-                this.mouseX = e.offsetX
-                this.mouseY = e.offsetY
+                mouseX = e.offsetX
+                mouseY = e.offsetY
                 flock.push(this.newBoid(e.offsetX, e.offsetY, flock.length))
             }, 50)
         }
@@ -110,21 +130,36 @@ export default {
         // start anim loop
         window.requestAnimationFrame(this.updateLoop)
     },
+    beforeDestroy() {
+        flock = []
+        boundaries = []
+        onBoids = []
+        console.log("reset boid data")
+    },
     methods: {
-        updateLoop() {
+        updateLoop(timestamp) {
+            // for use in template
+            this.fps = getFps(timestamp)
             this.updateBoundaries()
+
+            // reset canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+            for (let b of boundaries) {
+                // console.log(b)
+                this.ctx.rect(b.left, b.top, b.right - b.left, b.bottom - b.top)
+            }
+
+
             for(let boid of flock) {
+                // all velocity adjustments performed at once
                 this.adjustVelocity(boid)
+
                 boid.x += boid.dx
                 boid.y += boid.dy
 
                 this.drawBoid(boid, this.ctx)
             }
-
-            // for (let b of boundaries) {
-            //     this.ctx.rect(b.left, b.top, b.right - b.left, b.bottom - b.top)
-            // }
 
             window.requestAnimationFrame(this.updateLoop)
         },
@@ -145,7 +180,7 @@ export default {
         },
         drawBoid(boid, ctx) {
             boid.angle = Math.atan2(boid.dy, boid.dx) - (90 * Math.PI / 180)
-            boid.on = ((boid.on && Math.random() > .9) || (!boid.on && Math.random() > .75)) ? !boid.on : boid.on
+            boid.on = ((boid.on && Math.random() > .95) || (!boid.on && Math.random() > .7)) ? !boid.on : boid.on
 
             ctx.translate(boid.x, boid.y);
             ctx.rotate(boid.angle);
@@ -268,6 +303,7 @@ export default {
             }
 
             this.avoidBoundaries(boid)
+            this.targetMouse(boid)
             this.normalizeSpeed(boid)
         },
 
@@ -277,26 +313,26 @@ export default {
             const turnFactor = 1
 
             // avoid the walls
-            if (boid.x < margin * .75) {
-                boid.dx += turnFactor
+            if (boid.x < margin) {
+                boid.dx += turnFactor * .5
             }
             if (boid.x > this.canvas.width - margin) {
-                boid.dx -= turnFactor
+                boid.dx -= turnFactor * .5
             }
             if (boid.y < margin) {
-                boid.dy += turnFactor
+                boid.dy += turnFactor * .5
             }
             if (boid.y > this.canvas.height - margin) {
-                boid.dy -= turnFactor
+                boid.dy -= turnFactor * .5
             }
 
-            // avoid the mouse
-            var xMouseDiff = boid.x - this.mouseX
-            var yMouseDiff = boid.y - this.mouseY
-            if (Math.abs(xMouseDiff) < margin && Math.abs(yMouseDiff) < margin) {
-                boid.dx += xMouseDiff * turnFactor * .01
-                // boid.dy += yMouseDiff * turnFactor * .01
-            }
+            // avoid the mouse -- deciding to target instead
+            // var xMouseDiff = boid.x - mouseX
+            // var yMouseDiff = boid.y - mouseY
+            // if (Math.abs(xMouseDiff) < margin && Math.abs(yMouseDiff) < margin) {
+            //     boid.dx += xMouseDiff * turnFactor * .01
+            //     // boid.dy += yMouseDiff * turnFactor * .01
+            // }
 
             // avoid content boundaries
             for(let boundary of boundaries) {
@@ -312,12 +348,13 @@ export default {
                     } else {
                         closestDist = rDist
                     }
-                    if (Math.abs(closestDist) < margin) {
+                    if (Math.abs(closestDist) < margin * .4) {
                         boid.dy += closestDist * turnFactor * .1
                         // boid.dx += closestDist * turnFactor * .01
                     }
                     // if ((Math.min(Math.abs(boid.x) - )))
                 } 
+
                 if (boid.x >= boundary.left && boid.x <= boundary.right) {
                     // console.log(boid.id === 0 ? boid.id : '')
                     var closestDist = Math.min(Math.abs(boid.y - boundary.top), Math.abs(boid.y - boundary.bottom))
@@ -329,14 +366,24 @@ export default {
                     } else {
                         closestDist = bDist
                     }
-                    if (Math.abs(closestDist) < margin) {
-                        boid.dx += closestDist * turnFactor * .001
-                        boid.dy += closestDist * turnFactor * .001
+                    if (Math.abs(closestDist) < margin * .4) {
+                        boid.dx += closestDist * turnFactor * .1
+                        // boid.dy += closestDist * turnFactor * .001
                     }
                 }
             }
         },
+        targetMouse(boid) {
+            const targetFactor = .1
 
+            var targetDx = mouseX - boid.x
+            var targetDy = mouseY - boid.y
+
+            // console.log(targetDx, targetDy)
+
+            // boid.dx += targetDx * targetFactor
+            // boid.dy += targetDy * targetFactor
+        },
         normalizeSpeed(boid) {
             const speedLimit = 5
 
@@ -359,6 +406,7 @@ export default {
         updateBoundaries() {
             var contentArr = document.getElementsByClassName("canvasContent")
             if(contentArr.length !== boundaries.length) {
+                console.log("new boundary detected")
                 boundaries = []
                 contentArr.forEach((el) => {
                     this.registerBoundary(el.getBoundingClientRect())

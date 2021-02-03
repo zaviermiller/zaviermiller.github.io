@@ -4,7 +4,7 @@
     <v-main class="mx-md-12 px-md-12" >
       <v-container fluid>
         <v-fade-transition hide-on-leave>
-          <nuxt v-show="!loading"/>
+          <nuxt v-show="!loading" :key="$route.fullPath"/>
         </v-fade-transition>
       </v-container>
     </v-main>
