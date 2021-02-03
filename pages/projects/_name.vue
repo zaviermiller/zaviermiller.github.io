@@ -20,7 +20,8 @@ export default {
     data: () => ({
       project: {},
       logo: ``,
-      logoArr: []
+      logoArr: [],
+      logoMargin: 0
     }),
     async asyncData({ params }) {
       const name = params.name
@@ -29,7 +30,8 @@ export default {
     async mounted() {
       this.startLoading()
       this.project = await this.$content("projects/" + this.name).fetch()
-      this.logoArr = this.logos[this.project.slug].split("\n")
+      var baseLogo = this.logos[this.project.slug]
+      this.logoArr = baseLogo.split("\n")
       this.logo = "\n".repeat(this.logoArr.length - 1)
 
       setTimeout(() => {
@@ -58,16 +60,19 @@ export default {
           var timer = window.setInterval(() => {
             if (strIndex >= full[i].length) {
               clearInterval(timer)
-            console.log(this.logoArr[i])
               return
             } 
 
             this.logoArr[i] += item[strIndex]
             this.logo = this.logoArr.join("\n")
             strIndex++
+            this.computeMargin()
             
           }, i * 5)
         })
+      },
+      computeMargin() {
+        this.logoMargin = ((-document.getElementById("logo").clientWidth) / 2)
       }
     },
     computed: {
@@ -89,11 +94,17 @@ export default {
 
 <template>
     <!-- <ZenDemo /> -->
-      <v-row class="px-0 justify-space-between" style="width: 100%;" no-gutters>
+      <v-row class="px-0 justify-space-between ml-0 pr-2" style="width: 100%;">
         <v-col cols="12" md="5" v-if="project !== null">
-            <div :style="` width:300px; max-height:330px; white-space: pre; font-family: 'JetBrains Mono' !important; ${project.pageSize} color: ${project.color}; text-shadow: 0 0 4px;'`">
+            <div v-if="$vuetify.breakpoint.mdAndUp" :style="`width:300px; max-height:330px; white-space: pre; font-family: 'JetBrains Mono' !important; ${project.pageSize} color: ${project.color}; text-shadow: 0 0 4px;'`">
               {{logo}}
             </div>
+            
+            <v-card-text v-else>
+            <span id="logo" :style="`white-space: pre; left: 50%; position: relative; display: inline-block; font-family: 'JetBrains Mono' !important; ${project.pageSize} margin-left: ${logoMargin}px; color: ${project.color}; text-shadow: 0 0 4px;'`">
+              {{logo}}
+            </span>
+            </v-card-text>
             <v-row class="justify-space-between align-baseline mb-2" no-gutters>
                 <h1 class="text-title" style="font-family: 'JetBrains Mono' !important; font-weight: 400;">{{project.name}}</h1>
                 <p :style="`font-family: 'JetBrains Mono'; font-size: 20px; color: #ccc;`" class="mb-0">{{project.date}}</p>
@@ -106,7 +117,7 @@ export default {
               </v-col>
               <!-- <span :style="`font-family: 'JetBrains Mono'; font-size: 24px; color: ${project.color};`" class="mb-0">{{project.role}}</span> -->
               <div>
-                <span :style="`color:${color(language)}; font-family: 'JetBrains Mono'; font-size: ${$vuetify.breakpoint.smAndDown ? 15 : 23}px;`" class="ml-4" v-for="language in project.languages" :key="language">[{{language}}]</span>
+                <span :style="`color: ${color(language)}; font-family: 'JetBrains Mono'; font-size: ${$vuetify.breakpoint.smAndDown ? 15 : 23}px;`" class="ml-4" v-for="language in project.languages" :key="language">[{{language}}]</span>
               </div>
             </v-row>
             <dash-seperator class="my-4"/>

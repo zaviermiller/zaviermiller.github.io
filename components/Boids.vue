@@ -344,7 +344,7 @@ export default {
             //     // boid.dy += yMouseDiff * turnFactor * .01
             // }
 
-            // avoid content boundaries
+            // avoid content boundaries - this sorta works i think, but it definitely needs improving
             for(let boundary of boundaries) {
                 // console.log(boid.y, boundary.bottom)
                 if (boid.y >= boundary.top && boid.y <= boundary.bottom) {

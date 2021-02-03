@@ -16,9 +16,17 @@ export const featuredLogos = {
             return `
  ____         
 /_  / ___ ___ 
- / /_/ -_) _ \\     
+ / /_/ -_) _ \\
 /___/\\__/_//_/
 `
+        },
+        zenPageMobileLogo() {
+          return `
+   ____         
+  /_  / ___ ___ 
+   / /_/ -_) _ \\     
+  /___/\\__/_//_/
+          `
         },
         raiLogo() {
             return `
@@ -77,6 +85,13 @@ KM      JKN      KMYYYK      ]KH      ]KH
               "resale-ai": this.raiLogo,
               "blind-dog": this.bdLogo
             }
+        },
+        mobileLogos() {
+          return {
+            "zen": this.zenPageMobileLogo,
+            "resale-ai": this.raiLogo,
+            "blind-dog": this.bdLogo
+          }
         },
         thumbLogos() {
             return {

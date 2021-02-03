@@ -86,8 +86,8 @@ export default {
     <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
     <v-row :class="`justify-center ${ $vuetify.breakpoint.smAndDown ? '' : 'pl-12'}`">
       <v-col cols="12" class="pl-12 pt-12" id="repel">
-        <p :style="`${$vuetify.breakpoint.smAndDown ? 'margin-top: 40%;' : 'margin-top: 15%;'} mb-12`">
-          <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h3 text-sm-h1 heading slide canvasContent">Zavier Miller</span>
+        <p :style="`${$vuetify.breakpoint.smAndDown ? 'margin-top: 40%;' : 'margin-top: 15%;'}`">
+          <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h2 text-sm-h1 heading slide canvasContent">Zavier Miller</span>
         </p>
         <p class="mb-md-12">
           <span style="font-family: 'Chakra Petch' !important;" class="text-h5 text-sm-h3 grey--text text--lighten-2 subheading slide canvasContent">software developer and student</span>
