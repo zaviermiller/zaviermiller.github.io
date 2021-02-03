@@ -1,7 +1,9 @@
 <script>
+import Boids from '../components/Boids.vue'
 // import initMetaballs from "metaballs-js";
 
 export default {
+  components: { Boids },
 
   name: "index",
   data() {
@@ -16,7 +18,6 @@ export default {
       this.showJournal = Math.random() > .5
       var tmp = await document.getElementsByClassName("slideUp")
       tmp.forEach(s => { s.classList.add("slideY"); console.log(s) })
-      console.log(document.getElementsByClassName("slideUp"))
 
       // initMetaballs(this.$refs.metaball, this.options)
 
@@ -52,6 +53,10 @@ export default {
         backgroundColor: "#1A1D28",
         useDevicePixelRatio: true
       }
+    },
+    computedNum() {
+      if (process.browser) return window.innerWidth > 800 ? 150 : 50
+      return null
     }
   }
 }
@@ -59,96 +64,27 @@ export default {
 
 <template>
 <div>
-    <Particles
-    style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;"
-      id="tsparticles"
-      :options="{
-            background: false,
-            fpsLimit: 120,
-            interactivity: {
-                detectsOn: 'canvas',
-                events: {
-                    onClick: {
-                        enable: true,
-                        mode: 'repulse'
-                    },
-                    onHover: {
-                        enable: false,
-                        mode: 'repulse'
-                    },
-                    onDiv: {
-                      selectors: '#repel',
-                      enable: true,
-                      mode: 'repel',
-                      type: 'rectangle'
-                    },
-                    resize: true
-                },
-                modes: {
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    }
-                }
-            },
-            particles: {
-                color: {
-                    value: '#ffffff'
-                },
-                links: {
-                    color: '#ffffff',
-                    distance: 100,
-                    enable: true,
-                    opacity: 0.5,
-                    width: 1
-                },
-                collisions: {
-                    enable: true
-                },
-                move: {
-                    direction: 'none',
-                    enable: true,
-                    outMode: 'bounce',
-                    random: false,
-                    speed: 1,
-                    straight: false
-                },
-                number: {
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    },
-                    value: 90
-                },
-                opacity: {
-                    value: 0.5
-                },
-                shape: {
-                    type: 'circle'
-                },
-                size: {
-                    random: true,
-                    value: 2
-                }
-            },
-            detectRetina: true
-        }"
-    />
+    <boids :num="computedNum" >
+      <template>
     <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
-    <v-row class="justify-center">
+    <v-row :class="`justify-center`">
       <v-col cols="12" class="pl-12 pt-12" id="repel">
-        <h1 style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600; margin-top: 15%;" class="text-h2 text-sm-h1 heading slide">Zavier Miller</h1>
-        <h3 style="font-family: 'Chakra Petch' !important;" class="text-h4 text-sm-h3 grey--text text--lighten-2 mb-12 subheading slide">software developer and student</h3>
+        <p style="margin-top: 15%;">
+          <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h2 text-sm-h1 heading slide canvasContent">Zavier Miller</span>
+        </p>
+        <p class="mb-12">
+          <span style="font-family: 'Chakra Petch' !important;" class="text-h4 text-sm-h3 grey--text text--lighten-2 subheading slide canvasContent">software developer and student</span>
+        </p>
         <transition v-if="$vuetify.breakpoint.smAndUp" name="glitch">
-          <v-btn outlined class="slideUp" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
-          <v-btn outlined class="slideUp" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
+          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
+          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
           <!-- <v-btn outlined class="glitch" style="text-transform: none !important; font-family: 'JetBrains Mono'; " tile color="primary" to="/projects" :ripple="false"  data-text="Check out what I'm thinking">Check out what I'm thinking</v-btn> -->
-      <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly">
+      <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly" >
         <transition name="glitch">
-          <v-btn outlined block class="slideY" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal">Check out what I'm building</v-btn>
-          <v-btn outlined block class="slideY" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="showJournal">Check out what I'm thinking</v-btn>
+          <v-btn outlined block class="slideY canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal">Check out what I'm building</v-btn>
+          <v-btn outlined block class="slideY canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="showJournal">Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
       <!-- <v-col cols="6" class="pt-12 pl-12" style="margin-top: 7%;">
@@ -179,6 +115,8 @@ export default {
         </v-card-actions>
       </v-col>
     </v-row>
+      </template>
+    </boids>
   </div>
 </template>
 
@@ -217,6 +155,7 @@ export default {
   .slideY {
     opacity: 0;
     transform: translateY(20px);
+    transition: 0s !important;
   }
 
   .glitch:after {
