@@ -8,7 +8,25 @@ export default {
   name: "index",
   data() {
     return {
-      showJournal: null
+      showJournal: null,
+      links: [
+        {
+          href: "https://www.github.com/zaviermiller",
+          icon: "mdi-github"
+        },
+        {
+          href: "https://www.twitter.com/zaviermiller",
+          icon: "mdi-twitter"
+        },
+        {
+          href: "https://www.linkedin.com/in/zaviermiller",
+          icon: "mdi-linkedin"
+        },
+        {
+          href: "https://www.instagram.com/zavier.miller/",
+          icon: "mdi-instagram"
+        }
+      ]
     }
   },
   async mounted() {
@@ -102,14 +120,8 @@ export default {
       <v-col cols="12" style="position: absolute; bottom: 0px;">
         <v-card-actions>
           <v-spacer />
-        <v-btn icon x-large class="mx-2" href="https://www.github.com/zaviermiller" :ripple="false">
-          <v-icon x-large>mdi-github</v-icon>
-        </v-btn>
-        <v-btn icon x-large class="mx-2" href="https://www.twitter.com/zavierjmiller" :ripple="false">
-          <v-icon x-large>mdi-twitter</v-icon>
-        </v-btn>
-        <v-btn icon x-large class="mx-2" href="https://www.linkedin.com/in/zaviermiller" :ripple="false">
-          <v-icon x-large>mdi-linkedin</v-icon>
+        <v-btn icon x-large class="mx-2" :href="social.href" :ripple="false" v-for="social in links" :key="social.icon">
+          <v-icon x-large>{{ social.icon }}</v-icon>
         </v-btn>
         <v-spacer />
         </v-card-actions>
