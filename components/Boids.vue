@@ -1,6 +1,6 @@
 <template>
 <div class="parent">
-        <span class="grey--text canvasContent" :style="`font-family: 'JetBrains Mono'; ${ $vuetify.breakpoint.smAndDown ? 'position: absolute; bottom: 0px; left: 20px; font-size: 13px;' : 'position: absolute; bottom: 20px; right: 20px;'}`">FPS: {{fps}}</span>
+        <span class="grey--text canvasContent" :style="`font-family: 'JetBrains Mono'; ${ $vuetify.breakpoint.smAndDown ? 'position: absolute; top: 20px; left: 20px; font-size: 13px;' : 'position: absolute; bottom: 20px; right: 20px;'}`">FPS: {{fps}}</span>
         <canvas id="content" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" width="100%" height="100%" />
         <slot :content-id="'canvasContent'" ></slot>
     </div>
@@ -99,10 +99,10 @@ export default {
             mouseX = e.offsetX
             mouseY = e.offsetY
         }
-        this.canvas.ontouchmove = (e) => {
-            mouseX = e.offsetX
-            mouseY = e.offsetY
-        }
+        // this.canvas.ontouchmove = (e) => {
+        //     mouseX = e.offsetX
+        //     mouseY = e.offsetY
+        // }
 
         // register new boid on click
         let hold;
@@ -117,19 +117,21 @@ export default {
                 // }
             }, 50)
         }
-        this.canvas.ontouchstart = (e) => {
-            touch = setInterval(() => {
-                mouseX = e.offsetX
-                mouseY = e.offsetY
-                flock.push(this.newBoid(e.offsetX, e.offsetY, flock.length))
-            }, 50)
-        }
+        // this.canvas.ontouchstart = (e) => {
+        //     console.log(e)
+        //     touch = setInterval(() => {
+        //         mouseX = e.changedTouches[e.changedTouches.length - 1].clientX
+        //         mouseY = e.changedTouches[e.changedTouches.length - 1].clientY
+        //         flock.push(this.newBoid(mouseX, mouseY, flock.length))
+        //     }, 50)
+        // }
         this.canvas.onmouseup = (e) => {
             clearInterval(hold)
         }
-        this.canvas.ontouchend = (e) => {
-            clearInterval(touch)
-        }
+        // this.canvas.ontouchend = (e) => {
+        //     console.log(e)
+        //     clearInterval(touch)
+        // }
 
         // create the flock
         for(var i = 0; i < this.num; i++) {

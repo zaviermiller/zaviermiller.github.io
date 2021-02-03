@@ -275,6 +275,7 @@ export default {
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
   animation: glitchTop .5s linear;
   -webkit-animation: glitchTop .5s linear;
+  z-index: 4;
   /* text-shadow: none !important;
   opacity: 0; */
 }
@@ -301,7 +302,7 @@ export default {
   animation: glitchTop .5s linear;
   -webkit-animation: glitchTop .5s linear;
   position: absolute !important;
-  z-index: 9999;
+  z-index: 5;
 }
 
 </style>

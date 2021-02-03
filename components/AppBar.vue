@@ -29,6 +29,8 @@ export default {
       app
       color="background"
       right
+      v-if="$vuetify.breakpoint.smAndDown"
+      style="z-index: 999;"
     >
       <v-list
         nav

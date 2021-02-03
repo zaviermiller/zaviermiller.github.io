@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <AppBar />
-    <v-main class="mx-md-12 px-md-12" >
+    <v-main class="mx-md-12 px-md-12" style="overflow-x: hidden;">
       <v-container fluid>
         <v-fade-transition hide-on-leave>
           <nuxt v-show="!loading" :key="$route.fullPath"/>
