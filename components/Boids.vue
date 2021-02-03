@@ -21,7 +21,7 @@ var flock = []
 var boundaries = []
 let nearbyData
 
-var offLight = 0
+var onBoids = []
 
 function newBitset(length) {
     // create empty 'bitset' with all zeroes
@@ -103,7 +103,6 @@ export default {
 
         // create the flock
         for(var i = 0; i < this.num; i++) {
-            console.log("created")
             flock.push(this.newBoid(Math.random() * this.canvas.width, Math.random() * this.canvas.height, flock.length))
         }
 
@@ -137,6 +136,7 @@ export default {
                 dx: Math.random() * 20 - 5, // x vel
                 dy: Math.random() * 20 - 5, // y vel
                 angle: 0,
+                on: (Math.random() > .01)
                 // nearby: new Set([])
             }
             const angle = Math.atan2(boid.dy, boid.dx)
@@ -144,18 +144,15 @@ export default {
             return boid
         },
         drawBoid(boid, ctx) {
-            this.looper++
-            if (this.looper >= 10000) {
-                this.looper = 0
-                offLight = Math.floor(Math.random() * flock.length)
-            }
             boid.angle = Math.atan2(boid.dy, boid.dx) - (90 * Math.PI / 180)
+            boid.on = ((boid.on && Math.random() > .9) || (!boid.on && Math.random() > .75)) ? !boid.on : boid.on
+
             ctx.translate(boid.x, boid.y);
             ctx.rotate(boid.angle);
             ctx.translate(-boid.x, -boid.y);
-            ctx.fillStyle = this.$vuetify.theme.themes.dark.primary
+            ctx.fillStyle = boid.on ? this.$vuetify.theme.themes.dark.primary : "#ccc"
             ctx.shadowColor = ctx.fillStyle
-            ctx.shadowBlur = 4;
+            ctx.shadowBlur = boid.on ? 4 : 0;
             ctx.font = '15px "JetBrains Mono"';
             ctx.fillText('V', boid.x, boid.y);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -207,12 +204,12 @@ export default {
             let localNum = 0
 
             // centering vars
-            const centerFactor = .005
+            const centerFactor = .01
             let centerX = 0
             let centerY = 0
 
             // avoid vars
-            const avoidFactor = 0.05
+            const avoidFactor = 0.01
             let xAdjustment = 0
             let yAdjustment = 0
 
@@ -235,7 +232,7 @@ export default {
                     var xDiff = boid.x - otherBoid.x
                     var yDiff = boid.y - otherBoid.y
                     var distance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
-                    if (distance < 30) {
+                    if (distance < 50) {
                         xAdjustment += xDiff
                         yAdjustment += yDiff
                     }
@@ -280,7 +277,7 @@ export default {
             const turnFactor = 1
 
             // avoid the walls
-            if (boid.x < margin * .3) {
+            if (boid.x < margin * .75) {
                 boid.dx += turnFactor
             }
             if (boid.x > this.canvas.width - margin) {
@@ -298,7 +295,7 @@ export default {
             var yMouseDiff = boid.y - this.mouseY
             if (Math.abs(xMouseDiff) < margin && Math.abs(yMouseDiff) < margin) {
                 boid.dx += xMouseDiff * turnFactor * .01
-                boid.dy += yMouseDiff * turnFactor * .01
+                // boid.dy += yMouseDiff * turnFactor * .01
             }
 
             // avoid content boundaries
@@ -317,6 +314,7 @@ export default {
                     }
                     if (Math.abs(closestDist) < margin) {
                         boid.dy += closestDist * turnFactor * .1
+                        // boid.dx += closestDist * turnFactor * .01
                     }
                     // if ((Math.min(Math.abs(boid.x) - )))
                 } 
@@ -332,7 +330,8 @@ export default {
                         closestDist = bDist
                     }
                     if (Math.abs(closestDist) < margin) {
-                        boid.dx += closestDist * turnFactor * .1
+                        boid.dx += closestDist * turnFactor * .001
+                        boid.dy += closestDist * turnFactor * .001
                     }
                 }
             }

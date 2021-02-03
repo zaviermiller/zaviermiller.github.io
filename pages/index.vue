@@ -55,7 +55,7 @@ export default {
       }
     },
     computedNum() {
-      if (process.browser) return window.innerWidth > 800 ? 150 : 50
+      if (process.browser) return window.innerWidth > 800 ? 200 : 50
       return null
     }
   }
