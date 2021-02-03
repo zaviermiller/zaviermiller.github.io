@@ -16,6 +16,8 @@
 import { computedColors } from "@/mixins/colors.js"
 import DashSeperator from '../../components/DashSeperator.vue'
 
+import { mapMutations } from "vuex"
+
 export default {
   components: {
     DashSeperator
@@ -31,16 +33,24 @@ export default {
       return { slug }
     },
   async mounted() {
+    this.startLoading()
     this.post = await this.$content(this.slug).fetch()
     var pres = await document.getElementsByTagName("pre")
     pres.forEach(pre => {
         pre.classList.add("elevation-12")
     })
+    setTimeout(() => {
+      this.stopLoading()
+    },700)
   },
   computed: {
-  color() {
-    return this.colors[this.post.category]
-  }
+    color() {
+      return this.colors[this.post.category]
+    }
+  },
+  methods: {
+    ...mapMutations({startLoading: "load/startLoading"}),
+    ...mapMutations({stopLoading: "load/stopLoading"}),
   }
 }
 </script>

@@ -85,24 +85,24 @@ export default {
     <boids :num="computedNum" >
       <template>
     <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
-    <v-row :class="`justify-center pl-12`">
+    <v-row :class="`justify-center ${ $vuetify.breakpoint.smAndDown ? '' : 'pl-12'}`">
       <v-col cols="12" class="pl-12 pt-12" id="repel">
-        <p style="margin-top: 15%;">
+        <p style="margin-top: 15%; mb-12">
           <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h2 text-sm-h1 heading slide canvasContent">Zavier Miller</span>
         </p>
         <p class="mb-12">
           <span style="font-family: 'Chakra Petch' !important;" class="text-h4 text-sm-h3 grey--text text--lighten-2 subheading slide canvasContent">software developer and student</span>
         </p>
         <transition v-if="$vuetify.breakpoint.smAndUp" name="glitch">
-          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono';  " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
-          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono';  " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
+          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
+          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
           <!-- <v-btn outlined class="glitch" style="text-transform: none !important; font-family: 'JetBrains Mono'; " tile color="primary" to="/projects" :ripple="false"  data-text="Check out what I'm thinking">Check out what I'm thinking</v-btn> -->
       <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly" >
         <transition name="glitch">
-          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono';  " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
-          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono';  " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
+          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
+          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
       <!-- <v-col cols="6" class="pt-12 pl-12" style="margin-top: 7%;">

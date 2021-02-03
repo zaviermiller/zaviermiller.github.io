@@ -1,6 +1,6 @@
 <template>
 <div class="parent">
-        <span class="primary--text">FPS: {{fps}}</span>
+        <!-- <span class="primary--text" :style="`font-family: 'JetBrains Mono'; ${ $vuetify.breakpoint.smAndDown ? '' : 'position: absolute; bottom: 20px; right: 20px;'}`">FPS: {{fps}}</span> -->
         <canvas id="content" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" width="100%" height="100%" />
         <slot :content-id="'canvasContent'" ></slot>
     </div>

@@ -26,7 +26,7 @@ export default {
     },
   async mounted() {
     this.posts = await this.$content().fetch()
-    this.posts.sort((a, b) => { return Date.parse(a.created) < Date.parse(b.created) })
+    this.posts.sort((a, b) => { return new Date(a.created) > new Date(b.created) ? -1 : 1 })
     this.postSlide()
     // this.$emit("loadstop")
   },
@@ -51,6 +51,10 @@ export default {
 </script>
 
 <style>
+  .v-btn:hover, .v-btn:before, .v-btn:active {
+    background-color: transparent;
+    text-shadow: 0 0 4px;
+  }
 .link:hover, .link::before, .link:active {
     background-color: transparent;
     text-shadow: 0 0 4px;

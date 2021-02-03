@@ -2,7 +2,7 @@
 
 title: Building My First NN in Go
 
-created: 01-03-21
+created: 02-03-21
 
 category: ML
 
@@ -14,7 +14,7 @@ One more quick note before I get into it, I will have the sources I used to help
 ## Building the Neural Network
 In order to build the network, I used the `gonum.org/v1/gonum/mat` package so that at least the matrices were  abstracted away.
 
-The first step, from [this blog post](https://datadan.io/blog/neural-net-with-go), was pretty simple, I just had to build a `NeuralNetwork` struct to represent the overall network fields, which also held a config struct with some **configurable** network parameters. The code can be found in the blog post, as I pretty much ~~copied~~ followed it closely.
+The first step, from [this blog post](https://datadan.io/blog/neural-net-with-go), was pretty simple: I just had to build a `NeuralNetwork` struct to represent the overall network fields, which also held a config struct with some *configurable* network parameters. The code can be found in the blog post, as I pretty much ~~copied~~ followed it closely.
 
 After finishing that, I moved on to building some helper activation functions that would be used between the layors of the perceptron. The blog post only shows how to build a sigmoid function, so I guess I can show off my sick blog code preview
 ```go
@@ -46,6 +46,5 @@ Well, I finished building it all and unfortunately, it doesn't work. So, I am us
 
 After a changing it all out, and a little debugging, I was finally able to get the basic network working! With the current setup, I can get about 94.5% accuracy on the testing data, but I want to be able to get that as high as I can. I have a few ideas on how to improve the current network design, and then a couple on how to convert the current model into a deep neural net.
 
-## Testing and Improving the Model
-In order to try and improve the model a bit, I figured adding in the code to add in the bias for each layer would help improve the network at least slightly. However, after implementing them into the model I found that the accuracy actually decreased to about 92%. Oh wait, while typing this out I realized I didn't implement the model into the prediction lmao...[
-Ok! The first step, **correctly** implementing the bias into the network, actually did end up improving the network! By .4%. Not too much, but an improvement nonetheless! I have one more idea, which is to make the activation of each neuron the ReLU function that I wrote earlier rather than the Sigmoid function. After writing and implementing this, the model actually decreased in accurary to about 90%. Unfortunately, that's all I think I can tackle at the moment. There are more techniques to improve my basic MLP, like mini-batching, but I need to do more research before I try and take that on.
+## An Unfortunate Update
+Well, here I am exactly a month after I intended on posting this blog post. Over winter break I spent a lot of time building my framework up and making it clean Go code (I'm pretty proud of the structure I think it's nice). I was able to finish the basic MLP as well as a Deep Network that could have a configurable number of layers. Pretty sick. Then, I started *trying* to optimize... At some point in the process, my limited understanding of matrix algebra took precedence over my desire to build my framework up. I will probably come back and update it over the year, but I gotta learn a lil sum bout sum before I go much further. Thanks for reading this far! Here is the [project repo](https://github.com/zaviermiller/zml).
