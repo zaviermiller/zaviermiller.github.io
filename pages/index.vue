@@ -8,7 +8,7 @@ export default {
   name: "index",
   data() {
     return {
-      showJournal: false
+      showJournal: null
     }
   },
   async mounted() {
@@ -29,16 +29,16 @@ export default {
           clearInterval(timer)
           window.setTimeout(() => {
             btns.forEach(btn => { btn.classList.remove("slideY") })
+            window.setInterval(() => {
+              this.showJournal = !this.showJournal
+              console.log(document.getElementsByClassName("slide"))
+            }, 4000)
           }, 500)
           return
         }
         var el = slide[0]
         el.classList.remove("slide")
       }, 150)
-
-      window.setInterval(() => {
-        this.showJournal = !this.showJournal
-      }, 4000)
     }
 
   },
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <template>
-<div>
+<div :style="$vuetify.breakpoint.smAndDown ? 'overflow: hidden !important;' : ''">
     <boids :num="computedNum" >
       <template>
     <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
@@ -77,14 +77,14 @@ export default {
         </p>
         <transition v-if="$vuetify.breakpoint.smAndUp" name="glitch">
           <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
-          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
+          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
           <!-- <v-btn outlined class="glitch" style="text-transform: none !important; font-family: 'JetBrains Mono'; " tile color="primary" to="/projects" :ripple="false"  data-text="Check out what I'm thinking">Check out what I'm thinking</v-btn> -->
       <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly" >
         <transition name="glitch">
-          <v-btn outlined block class="slideY canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal">Check out what I'm building</v-btn>
-          <v-btn outlined block class="slideY canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="showJournal">Check out what I'm thinking</v-btn>
+          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
+          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
       <!-- <v-col cols="6" class="pt-12 pl-12" style="margin-top: 7%;">
@@ -260,8 +260,10 @@ export default {
 
 
 .glitch-enter-active::after {
-    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-  animation: glitchTop .7s linear;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  animation: glitchTop .5s linear;
+  -webkit-animation: glitchTop .5s linear;
   /* text-shadow: none !important;
   opacity: 0; */
 }
@@ -283,8 +285,10 @@ export default {
 
 
 .glitch-leave-active {
-    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
-  animation: glitchTop .7s linear;
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  animation: glitchTop .5s linear;
+  -webkit-animation: glitchTop .5s linear;
   position: absolute !important;
   z-index: 9999;
 }

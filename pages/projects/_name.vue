@@ -66,7 +66,7 @@ export default {
             this.logo = this.logoArr.join("\n")
             strIndex++
             
-          }, i * 3)
+          }, i * 5)
         })
       }
     },

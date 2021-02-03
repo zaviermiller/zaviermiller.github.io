@@ -55,12 +55,10 @@ export default {
         looper: 0
     }),
     mounted() {
-        console.log(this.$vuetify)
         this.canvas = document.getElementById("content")
         // console.log(document.getElementById("canvasContent").getBoundingClientRect())
         var canvDims = this.canvas.getBoundingClientRect()
         this.canvasOffset = [canvDims.x, canvDims.y]
-        console.log(this.canvas.getBoundingClientRect())
         this.canvas.width = this.canvas.clientWidth
         this.canvas.height = this.canvas.clientHeight
         this.ctx = this.canvas.getContext("2d")
@@ -68,7 +66,6 @@ export default {
         // create obstacles from class name
         document.getElementsByClassName("canvasContent").forEach((el) => {
             this.registerBoundary(el.getBoundingClientRect())
-            console.log(el.getBoundingClientRect(), boundaries)
         })
 
         // initialize nearby i
@@ -82,13 +79,26 @@ export default {
 
         // register new boid on click
         let hold;
+        let touch;
         this.canvas.onmousedown = (e) => {
             hold = setInterval(() => {
+                this.mouseX = e.offsetX
+                this.mouseY = e.offsetY
+                flock.push(this.newBoid(e.offsetX, e.offsetY, flock.length))
+            }, 50)
+        }
+        this.canvas.ontouchstart = (e) => {
+            touch = setInterval(() => {
+                this.mouseX = e.offsetX
+                this.mouseY = e.offsetY
                 flock.push(this.newBoid(e.offsetX, e.offsetY, flock.length))
             }, 50)
         }
         this.canvas.onmouseup = (e) => {
             clearInterval(hold)
+        }
+        this.canvas.ontouchend = (e) => {
+            clearInterval(touch)
         }
 
         // create the flock
@@ -143,12 +153,11 @@ export default {
             ctx.translate(boid.x, boid.y);
             ctx.rotate(boid.angle);
             ctx.translate(-boid.x, -boid.y);
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 0;
-            ctx.shadowBlur = 4;
             ctx.fillStyle = this.$vuetify.theme.themes.dark.primary
+            ctx.shadowColor = ctx.fillStyle
+            ctx.shadowBlur = 4;
             ctx.font = '15px "JetBrains Mono"';
-            ctx.fillText('v', boid.x, boid.y);
+            ctx.fillText('V', boid.x, boid.y);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         },
         inView(b1, b2) {
