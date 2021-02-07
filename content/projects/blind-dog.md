@@ -1,5 +1,5 @@
 ---
-links: [{to: "https://www.blinddogclothing.com", icon: "mdi-open-in-new"}]
+links: [{to: "https://www.blinddogclothing.com", icon: "mdi-open-in-new", name: "Blind Dog eCommerce website"}]
 languages: ["Vue", "Ruby/Rails"]
 color: "#fff"
 date: "2019 - 2020"

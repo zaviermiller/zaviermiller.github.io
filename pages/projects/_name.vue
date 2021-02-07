@@ -15,7 +15,12 @@ function sleep(ms) {
 
 export default {
   components: { DashSeperator, RAIImages, BDImages, ZenDemo },
-    name: "ProjectDetails",
+  name: "ProjectDetails",
+  head() {
+    return {
+      title: this.project.name
+    }
+  },
     mixins: [featuredLogos],
     data: () => ({
       project: {},
@@ -110,8 +115,8 @@ export default {
                 <p :style="`font-family: 'JetBrains Mono'; font-size: 20px; color: #ccc;`" class="mb-0">{{project.date}}</p>
             </v-row>
             <v-row class="justify-space-between align-baseline" no-gutters>
-              <v-col cols="4">
-                <v-btn v-for="item in project.links" :key="item.to" :href="item.to" x-large class="mr-2" target="_blank" icon :ripple="false">
+              <v-col cols="7" md="4">
+                <v-btn v-for="item in project.links" :key="item.to" :href="item.to" :aria-label="item.name" x-large class="mr-2" target="_blank" rel="noopener noreferrer" icon :ripple="false">
                     <v-icon large :color="project.color">{{ item.icon }}</v-icon>
                 </v-btn>
               </v-col>

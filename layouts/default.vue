@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <AppBar />
+    <AppBar v-if="!loading" />
     <v-main class="mx-md-12 px-md-12" style="overflow-x: hidden;">
       <v-container fluid>
         <v-fade-transition hide-on-leave>

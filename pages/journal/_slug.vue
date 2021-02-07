@@ -22,6 +22,11 @@ export default {
   components: {
     DashSeperator
   },
+  head() {
+    return {
+      title: this.post.title
+    }
+  },
   mixins: [computedColors],
   data() {
     return {
@@ -56,6 +61,10 @@ export default {
 </script>
 
 <style>
+.v-btn:hover, .v-btn::before, .v-btn:active, .v-card::before {
+    background-color: transparent;
+    text-shadow: 0 0 4px;
+}
 .link:hover, .link::before, .link:active {
     background-color: transparent;
     text-shadow: 0 0 4px;

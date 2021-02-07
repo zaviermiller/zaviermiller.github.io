@@ -1,5 +1,5 @@
 ---
-links: [{to: "https://www.resaleai.com", icon: "mdi-open-in-new"}]
+links: [{to: "https://www.resaleai.com", icon: "mdi-open-in-new", name: "ResaleAI website"}]
 languages: ["Vue", "Ruby/Rails", "JavaScript"]
 color: "#0091ea"
 thumbSize: "line-height: 14px; font-size: 11px;"

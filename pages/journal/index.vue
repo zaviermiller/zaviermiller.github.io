@@ -17,6 +17,11 @@ export default {
   components: {
     BlogPostThumbnail,
   },
+  head() {
+    return {
+      title: "Journal"
+    }
+  },
   data() {
     return {
       posts: [],

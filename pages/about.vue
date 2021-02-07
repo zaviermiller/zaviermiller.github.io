@@ -10,17 +10,17 @@
       <v-col cols="12" sm="6" class="mr-12">
         <v-img src="dapper.JPG" class="elevation-12">
           <template v-slot:placeholder>
-        <v-row
-          class="fill-height ma-0"
-          align="center"
-          justify="center"
-        >
-          <v-progress-circular
-            indeterminate
-            color="grey lighten-5"
-          ></v-progress-circular>
-        </v-row>
-      </template>
+            <v-row
+              class="fill-height ma-0"
+              align="center"
+              justify="center"
+            >
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
         </v-img>
         <p class="text-caption" style="font-family: 'JetBrains Mono' !important;">Me (right) and my buddy (left) looking dapper at our senior Model United Nations conference B]</p>
       </v-col>
@@ -29,7 +29,12 @@
 
 <script>
 export default {
-
+  name: "about",
+  head() {
+    return {
+      title: "About"
+    }
+  },
 }
 </script>
 

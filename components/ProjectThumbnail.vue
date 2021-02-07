@@ -39,7 +39,7 @@ export default {
                 </span>
                 <v-hover v-for="item in project.links" :key="item.to" >
                     <template v-slot="{ hover }">
-                        <v-btn :href="item.to" target="_blank" icon style="float:right;" :ripple="false">
+                        <v-btn :href="item.to" target="_blank" :aria-label="item.name" icon style="float:right;" :ripple="false" rel="noopener noreferrer">
                             <v-icon :size="25" :color="hover ? color : 'white'">{{ item.icon }}</v-icon>
                         </v-btn>
                     </template>

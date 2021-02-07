@@ -1,17 +1,26 @@
 <script>
+import DashSeperator from './DashSeperator.vue'
+import MenuIcon from './MenuIcon.vue'
 export default {
+  components: { MenuIcon, DashSeperator },
     name: "AppBar",
     data: () => ({
         drawer: false,
         group: null
-    })
+    }),
+    computed: {
+      computedTop() {
+        const padding = 10
+        return document.getElementById("appbar").offsetHeight + padding
+      }
+    }
 }
 </script>
 
 <template>
 <div>
-  <v-app-bar app flat absolute color="rgba(0,0,0,0)" class="px-md-12 mx-md-12 my-4">
-      <v-toolbar-title style="font-family: 'Aleo' !important; cursor: pointer;" class="text-h4" @click="$router.push('/')">Z</v-toolbar-title>
+  <v-app-bar app flat absolute color="rgba(0,0,0,0)" :class="`px-md-12 mx-md-12 ${drawer ? 'mt-4' : 'my-4'}`" id="appbar">
+      <v-toolbar-title style="font-family: 'Aleo' !important; cursor: pointer;" class="text-h4 mb-n1" @click="$router.push('/')">Z</v-toolbar-title>
 
       <v-spacer />
     <template v-if="$vuetify.breakpoint.mdAndUp">
@@ -19,34 +28,28 @@ export default {
       <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/journal">Journal</v-btn>||
       <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/about">About</v-btn>
     </template>
-    <v-app-bar-nav-icon v-else @click="drawer = true"></v-app-bar-nav-icon>
+    <!-- <v-app-bar-nav-icon v-else @click="drawer = true" aria-label="nav icon"></v-app-bar-nav-icon> -->
+    <menu-icon v-else aria-label="nav icon" @click="drawer = !drawer" />
   </v-app-bar>
-
-  <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      temporary
-      app
-      color="background"
-      right
-      v-if="$vuetify.breakpoint.smAndDown"
-      style="z-index: 999;"
-    >
+    <v-expand-transition v-if="$vuetify.breakpoint.smAndDown">
       <v-list
-        nav
-        dense
+      v-if="drawer"
+      min-width="100%"
+      :style="`z-index: 999; background-color: var(--v-background-base) !important; top: ${computedTop}px; position: relative;`"
       >
+        <DashSeperator width="80%" style="margin-left: -40%; position: relative; left: 50%;" />
         <v-list-item>
-            <v-btn text class="appbar-items" block :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/projects">Projects</v-btn>
+            <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important; margin-left: 5%;" exact-active-class="underlined" active-class='underlined' to="/projects">Projects</v-btn>
         </v-list-item>
         <v-list-item>
-            <v-btn text class="appbar-items" block :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/journal">Journal</v-btn>
+            <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important; margin-left: 5%;" exact-active-class="underlined" active-class='underlined' to="/journal">Journal</v-btn>
         </v-list-item>
         <v-list-item>
-            <v-btn text class="appbar-items" block :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/about">About</v-btn>
+            <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important; margin-left: 5%;" exact-active-class="underlined" active-class='underlined' to="/about">About</v-btn>
         </v-list-item>
+        <DashSeperator width="80%" style="margin-left: -40%; position: relative; left: 50%;" />
       </v-list>
-    </v-navigation-drawer>
+    </v-expand-transition>
 </div>
 </template>
 
@@ -64,5 +67,10 @@ export default {
     }
     .underlined::before {
     background-color: transparent !important;
+    }
+    .inset-shadow {
+      -webkit-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.30) !important;
+      -moz-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.30) !important;
+      box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.30) !important;
     }
 </style>

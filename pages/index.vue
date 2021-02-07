@@ -2,62 +2,56 @@
 import Boids from '../components/Boids.vue'
 // import initMetaballs from "metaballs-js";
 
+import { mapMutations } from "vuex"
+
 export default {
   components: { Boids },
-
+  head() {
+    return {
+      title: "Home",
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no' },
+      ]
+    }
+  },
   name: "index",
   data() {
     return {
+      localLoad: true,
       showJournal: null,
       links: [
         {
           href: "https://www.github.com/zaviermiller",
-          icon: "mdi-github"
+          icon: "mdi-github",
+          name: "Github"
         },
         {
           href: "https://www.twitter.com/zaviermiller",
-          icon: "mdi-twitter"
+          icon: "mdi-twitter",
+          name: "Twitter"
         },
         {
           href: "https://www.linkedin.com/in/zaviermiller",
-          icon: "mdi-linkedin"
+          icon: "mdi-linkedin",
+          name: "LinkedIn"
         },
         {
           href: "https://www.instagram.com/zavier.miller/",
-          icon: "mdi-instagram"
+          icon: "mdi-instagram",
+          name: "Instagram"
         }
       ]
     }
   },
-  async mounted() {
+  created() {
     if (process.browser) {
-
-      
-      this.showJournal = Math.random() > .5
-      var tmp = await document.getElementsByClassName("slideUp")
-      tmp.forEach(s => { s.classList.add("slideY"); console.log(s) })
-
-      // initMetaballs(this.$refs.metaball, this.options)
-
-      // animation
-      var slide = await (document.getElementsByClassName("slide"))
-      var btns = await document.getElementsByClassName("slideY")
-      let timer = window.setInterval(() => {
-        if (!slide.length) {
-          clearInterval(timer)
-          window.setTimeout(() => {
-            btns.forEach(btn => { btn.classList.remove("slideY") })
-            window.setInterval(() => {
-              this.showJournal = !this.showJournal
-            }, 4000)
-          }, 500)
-          return
-        }
-        var el = slide[0]
-        el.classList.remove("slide")
-      }, 150)
+      this.startLoading()
+      setTimeout(() => {
+        this.stopLoading()
+        this.localLoad = false
+        this.initAnim()
+      }, 500)
     }
-
   },
   computed: {
     options() {
@@ -72,36 +66,66 @@ export default {
       }
     },
     computedNum() {
-      if (process.browser) return window.innerWidth > 800 ? 200 : 75
+      if (process.browser) return window.innerWidth > 800 ? 200 : 25
       return null
+    }
+  },
+  methods: {
+    ...mapMutations({startLoading: "load/startLoading"}),
+    ...mapMutations({stopLoading: "load/stopLoading"}),
+    async initAnim() {
+      this.showJournal = Math.random() > .5
+      var tmp = await document.getElementsByClassName("slideUp")
+      tmp.forEach(s => { s.classList.add("slideY"); console.log(s) })
+
+      // initMetaballs(this.$refs.metaball, this.options)
+
+      // animation
+      var slide = await (document.getElementsByClassName("slide"))
+      var btns = await document.getElementsByClassName("slideY")
+      let timer = window.setInterval(() => {
+        if (!slide.length) {
+          clearInterval(timer)
+          window.setTimeout(() => {
+            btns.forEach(btn => { btn.classList.remove("slideY"); })
+            window.setInterval(() => {
+              this.showJournal = !this.showJournal
+            }, 4000)
+          }, 500)
+          return
+        }
+        var el = slide[0]
+        el.classList.remove("slide")
+        el.classList.add("canvasContent")
+      }, 150)
     }
   }
 }
 </script>
 
 <template>
-<div>
-    <boids :num="computedNum" >
+<div v-if="!localLoad">
+    <boids :num="computedNum">
       <template>
     <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
-    <v-row :class="`justify-center ${ $vuetify.breakpoint.smAndDown ? '' : 'pl-12'}`">
+    <v-row :class="`justify-center ${ $vuetify.breakpoint.smAndDown ? '' : 'pl-12'} noselect`">
       <v-col cols="12" class="pl-12 pt-12" id="repel">
-        <p :style="`${$vuetify.breakpoint.smAndDown ? 'margin-top: 40%;' : 'margin-top: 15%;'}`">
-          <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h2 text-sm-h1 heading slide canvasContent">Zavier Miller</span>
+        <p :style="`${$vuetify.breakpoint.smAndDown ? 'margin-top: 30%;' : 'margin-top: 15%;'}`">
+          <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h2 text-sm-h1 heading slide">Zavier Miller</span>
         </p>
         <p class="mb-md-12">
-          <span style="font-family: 'Chakra Petch' !important;" class="text-h5 text-sm-h3 grey--text text--lighten-2 subheading slide canvasContent">software developer and student</span>
+          <span style="font-family: 'Chakra Petch' !important;" class="text-h5 text-sm-h3 grey--text text--lighten-2 subheading slide">software developer and student</span>
         </p>
         <transition v-if="$vuetify.breakpoint.smAndUp" name="glitch">
-          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
-          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
+          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'" nuxt>Check out what I'm building</v-btn>
+          <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'" nuxt>Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
           <!-- <v-btn outlined class="glitch" style="text-transform: none !important; font-family: 'JetBrains Mono'; " tile color="primary" to="/projects" :ripple="false"  data-text="Check out what I'm thinking">Check out what I'm thinking</v-btn> -->
       <v-col cols="10" v-if="$vuetify.breakpoint.xsOnly">
         <transition name="glitch">
-          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'">Check out what I'm building</v-btn>
-          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'">Check out what I'm thinking</v-btn>
+          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'" nuxt>Check out what I'm building</v-btn>
+          <v-btn outlined block class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/journal" :ripple="false" v-if="showJournal" data-text="Check out what I'm thinking" :key="'thinking'" nuxt>Check out what I'm thinking</v-btn>
         </transition>
       </v-col>
       <!-- <v-col cols="6" class="pt-12 pl-12" style="margin-top: 7%;">
@@ -119,9 +143,11 @@ export default {
       <v-col cols="12" style="position: absolute; bottom: 0px;">
         <v-card-actions>
           <v-spacer />
-        <v-btn icon x-large class="mx-2" :href="social.href" :ripple="false" v-for="social in links" :key="social.icon">
-          <v-icon x-large>{{ social.icon }}</v-icon>
-        </v-btn>
+          <div class="canvasContent">
+            <v-btn icon x-large class="mx-2" :href="social.href" :ripple="false" v-for="social in links" :aria-label="social.name" :key="social.href">
+              <v-icon x-large>{{ social.icon }}</v-icon>
+            </v-btn>
+          </div>
         <v-spacer />
         </v-card-actions>
       </v-col>
@@ -303,6 +329,16 @@ export default {
   -webkit-animation: glitchTop .5s linear;
   position: absolute !important;
   z-index: 5;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <boids :num="100">
+  <boids :num="200" debug>
       <template slot-scope="{ contentId }">
-        <h1 :id="contentId">Test</h1>
+        <span :class="contentId + 'text-h1'">Test</span>
       </template>
   </boids>
 </template>
@@ -10,6 +10,11 @@
 import Boids from '../components/Boids.vue'
 export default {
     components: { Boids },
+    head() {
+    return {
+      title: "Boids Tests"
+    }
+  },
     mounted() {
     }
 }

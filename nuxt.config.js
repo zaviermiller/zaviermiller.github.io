@@ -4,12 +4,14 @@ import GithubOutline from "./components/icons/GithubOutline"
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s',
-    title: 'Zavier',
+    titleTemplate: 'Zavier - %s',
+    htmlAttrs: {
+      lang: 'en'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: 'Zavier Miller\'s Personal Portfolio Website' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -51,6 +53,9 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+
+    // generate robots.txt
+    '@nuxtjs/robots',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

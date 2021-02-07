@@ -5,6 +5,11 @@ import ProjectThumbnail from "@/components/ProjectThumbnail.vue"
 export default {
   components: { ProjectThumbnail },
     name: "ProjectsPage",
+    head() {
+      return {
+        title: "Projects"
+      }
+    },
     mixins: [featuredLogos],
     data: () => ({
       selectedProject: null,
@@ -16,7 +21,8 @@ export default {
           links: [
             {
               to: "https://github.com/zaviermiller/zml",
-              icon: "mdi-github"
+              icon: "mdi-github",
+              name: "Github"
             }
           ]
         },
@@ -27,7 +33,8 @@ export default {
           name: "Advent of Code 2020",
           links: [{
             to: "https://github.com/zaviermiller/AoC-2020",
-            icon: "mdi-github"
+            icon: "mdi-github",
+            name: "Github",
           }]
         },
 
@@ -37,7 +44,8 @@ export default {
           name: "Zerminal",
           links: [{
             to: "https://github.com/zaviermiller/Zerminal",
-            icon: "mdi-github"
+            icon: "mdi-github",
+            name: "Github",
           }]
         },
 
@@ -53,7 +61,8 @@ export default {
           name: "Multiplayer Blackjack",
           links: [{
             to: "https://github.com/zaviermiller/blackjack-networking",
-            icon: "mdi-github"
+            icon: "mdi-github",
+            name: "Github",
           }]
         },
 
@@ -62,11 +71,13 @@ export default {
           name: "HAMMERTime MTSS App",
           links: [{
             to: "https://github.com/zaviermiller/HAMMERTime-MTSS",
-            icon: "mdi-github"
+            icon: "mdi-github",
+            name: "Github",
           },
           {
             to: "https://hammertimemtss.herokuapp.com",
-            icon: "mdi-open-in-new"
+            icon: "mdi-open-in-new",
+            name: "Demo",
           }
           ]
         },
@@ -78,11 +89,13 @@ export default {
           links: [
             {
               to: "https://github.com/zaviermiller/cluelesscreative",
-              icon: "mdi-github"
+              icon: "mdi-github",
+              name: "Github",
             },
             {
               to: "https://afternoon-ocean-24608.herokuapp.com/",
-              icon: "mdi-open-in-new"
+              icon: "mdi-open-in-new",
+              name: "Website",
             }
           ]
         },
@@ -94,11 +107,13 @@ export default {
           links: [
             {
               to: "https://github.com/homeworkhotline/homeworkhotlineapp",
-              icon: "mdi-github"
+              icon: "mdi-github",
+              name: "Github",
             },
             {
               to: "https://afternoon-ocean-24608.herokuapp.com/clients/homework-hotline",
-              icon: "mdi-open-in-new"
+              icon: "mdi-open-in-new",
+              name: "More information",
             }
           ]
         },
@@ -110,11 +125,26 @@ export default {
           links: [
             {
               to: "https://github.com/zaviermiller/xeffect",
-              icon: "mdi-github"
+              icon: "mdi-github",
+              name: "Github",
             },
             {
               to: "https://xeffect.herokuapp.com/",
-              icon: "mdi-open-in-new"
+              icon: "mdi-open-in-new",
+              name: "Demo",
+            }
+          ]
+        },
+
+        // JS Celebrate!
+        {
+          language: "Javascript",
+          name: "jQuery Celebrate Plugin",
+          links: [
+            {
+              to: "https://github.com/zaviermiller/jquery-celebrate-plugin",
+              icon: "mdi-github",
+              name: "Github"
             }
           ]
         }
