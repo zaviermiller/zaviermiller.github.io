@@ -5,5 +5,6 @@ export const languageColors = {
     Python: "#306998",
     "Ruby/Rails": "#CC0000",
     "HTML": "#F16529",
-    "JavaScript": "#F0DB4F"
+    "JavaScript": "#F0DB4F",
+    React: "#61DBFB"
   }
