@@ -138,8 +138,8 @@ export default {
 
         // JS Celebrate!
         {
-          language: "Javascript",
-          name: "jQuery Celebrate Plugin",
+          language: "JavaScript",
+          name: "jQuery Celebrate",
           links: [
             {
               to: "https://github.com/zaviermiller/jquery-celebrate-plugin",
@@ -223,7 +223,7 @@ export default {
 .v-btn:hover, .v-btn::before, .v-btn:active, .v-card::before {
     background-color: transparent;
     text-shadow: 0 0 4px;
-  }
+}
 .v-card-text {
   color: #000 !important;
 }
