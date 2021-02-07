@@ -14,6 +14,24 @@ export default {
     data: () => ({
       selectedProject: null,
       archived: [
+        // H4I - Mindversity
+        {
+          language: "React",
+          name: "H4I - Mindversity",
+          links: [
+            {
+              to: "https://github.com/hack4impact-utk/mindversity-website",
+              icon: "mdi-github",
+              name: "Github"
+            },
+            {
+              to: "https://www.mindversity.com",
+              icon: "mdi-open-in-new",
+              name: "Demo"
+            }
+          ]
+        },
+
         // ZML
         {
           language: "Go",
