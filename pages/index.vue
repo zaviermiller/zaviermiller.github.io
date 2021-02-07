@@ -66,6 +66,7 @@ export default {
       }
     },
     computedNum() {
+      console.log("TEST")
       if (process.browser) return window.innerWidth > 800 ? 200 : 25
       return null
     }

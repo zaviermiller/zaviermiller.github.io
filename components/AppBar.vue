@@ -3,17 +3,22 @@ import DashSeperator from './DashSeperator.vue'
 import MenuIcon from './MenuIcon.vue'
 export default {
   components: { MenuIcon, DashSeperator },
-    name: "AppBar",
-    data: () => ({
-        drawer: false,
-        group: null
-    }),
-    computed: {
-      computedTop() {
-        const padding = 10
-        return document.getElementById("appbar").offsetHeight + padding
-      }
+  name: "AppBar",
+  data: () => ({
+      drawer: false,
+      group: null
+  }),
+  watch: {
+    "$route.fullPath"(v) {
+      this.drawer = false
     }
+  },
+  computed: {
+    computedTop() {
+      const padding = 10
+      return document.getElementById("appbar").offsetHeight + padding
+    }
+  }
 }
 </script>
 
@@ -24,12 +29,12 @@ export default {
 
       <v-spacer />
     <template v-if="$vuetify.breakpoint.mdAndUp">
-      <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/projects">Projects</v-btn>||
-      <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/journal">Journal</v-btn>||
-      <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' to="/about">About</v-btn>
+      <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' nuxt to="/projects">Projects</v-btn>||
+      <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' nuxt to="/journal">Journal</v-btn>||
+      <v-btn text class="appbar-items" :ripple="false" style="font-family: 'JetBrains Mono'; text-transform: none !important;" exact-active-class="underlined" active-class='underlined' nuxt to="/about">About</v-btn>
     </template>
     <!-- <v-app-bar-nav-icon v-else @click="drawer = true" aria-label="nav icon"></v-app-bar-nav-icon> -->
-    <menu-icon v-else aria-label="nav icon" @click="drawer = !drawer" />
+    <menu-icon v-else aria-label="nav icon" :open="drawer" @click="drawer = !drawer" />
   </v-app-bar>
     <v-expand-transition v-if="$vuetify.breakpoint.smAndDown">
       <v-list

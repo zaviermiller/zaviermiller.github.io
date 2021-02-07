@@ -5,10 +5,24 @@
 */
 export default {
     name: "AnimatedMenuIcon",
+    props: {
+        open: {
+            type: Boolean,
+            required: true
+        }
+    },
+    watch: {
+        open(v) {
+            var e = document.getElementById("nav-icon")
+            if (v) {
+                e.classList.add("open")
+            } else {
+                e.classList.remove("open")
+            }
+        }
+    },
     methods: {
         handleClick() {
-            var e = document.getElementById("nav-icon")
-            e.classList.toggle("open")
             this.$emit("click")
         }
     }
