@@ -15,10 +15,10 @@
 */
 const MAX_BOIDS = 250
 const VIEW_DIST = 100
-const VIEW_ANGLE = 180
+const VIEW_ANGLE = 240
 const CHUNK_SIZE = 100 // square screen chunk size
 
-const VIEW_ANGLE_RAD = VIEW_ANGLE * (Math.PI / 180)
+const VIEW_ANGLE_RAD = VIEW_ANGLE / 2 * (Math.PI / 180)
 
 // non-reactive array of boids
 var flock = []

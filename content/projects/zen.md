@@ -1,6 +1,6 @@
 ---
 # unfortunately cant put logos in this file...
-links: [{to: "https://github.com/zaviermiller/zen", icon: "mdi-github"}, {to: "https://github.com/zaviermiller/zen/releases/", icon: "mdi-download"}]
+links: [{to: "https://github.com/zaviermiller/zen", icon: "mdi-github", name: "Github"}, {to: "https://github.com/zaviermiller/zen/releases/", icon: "mdi-download", name: "Download"}]
 languages: ["Go"]
 color: '#50d453'
 name: "Zen"

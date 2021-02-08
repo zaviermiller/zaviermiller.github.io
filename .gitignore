@@ -90,3 +90,5 @@ sw.*
 *.swp
 
 .vs-code/
+
+content/drafts

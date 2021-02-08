@@ -14,24 +14,20 @@ export default {
     data: () => ({
       selectedProject: null,
       archived: [
-        // H4I - Mindversity
-        {
-          language: "React",
-          name: "H4I - Mindversity",
-          links: [
-            {
-              to: "https://github.com/hack4impact-utk/mindversity-website",
-              icon: "mdi-github",
-              name: "Github"
-            },
-            {
-              to: "https://www.mindversity.com",
-              icon: "mdi-open-in-new",
-              name: "Demo"
-            }
-          ]
-        },
 
+        // Zoids
+        // {
+        //   language: "Vue",
+        //   name: "Zoids",
+        //   links: [
+        //     {
+        //       to: "https://github.com/zaviermiller/zoids",
+        //       icon: "mdi-github",
+        //       name: "Github"
+        //     }
+        //   ]
+        // },
+        
         // ZML
         {
           language: "Go",
@@ -42,6 +38,24 @@ export default {
               icon: "mdi-github",
               name: "Github"
             }
+          ]
+        },
+
+        // H4I - Mindversity
+        {
+          language: "React",
+          name: "H4I - Mindversity",
+          links: [
+            {
+              to: "https://www.mindversity.com",
+              icon: "mdi-open-in-new",
+              name: "Demo"
+            },
+            {
+              to: "https://github.com/hack4impact-utk/mindversity-website",
+              icon: "mdi-github",
+              name: "Github"
+            },
           ]
         },
 
@@ -87,16 +101,17 @@ export default {
         {
           language: "Ruby/Rails",
           name: "HAMMERTime MTSS App",
-          links: [{
-            to: "https://github.com/zaviermiller/HAMMERTime-MTSS",
-            icon: "mdi-github",
-            name: "Github",
-          },
-          {
-            to: "https://hammertimemtss.herokuapp.com",
-            icon: "mdi-open-in-new",
-            name: "Demo",
-          }
+          links: [
+            {
+              to: "https://hammertimemtss.herokuapp.com",
+              icon: "mdi-open-in-new",
+              name: "Demo",
+            },
+            {
+              to: "https://github.com/zaviermiller/HAMMERTime-MTSS",
+              icon: "mdi-github",
+              name: "Github",
+            },
           ]
         },
 
@@ -106,15 +121,15 @@ export default {
           name: "Clueless Creative",
           links: [
             {
+              to: "https://afternoon-ocean-24608.herokuapp.com/",
+              icon: "mdi-open-in-new",
+              name: "Website",
+            },
+            {
               to: "https://github.com/zaviermiller/cluelesscreative",
               icon: "mdi-github",
               name: "Github",
             },
-            {
-              to: "https://afternoon-ocean-24608.herokuapp.com/",
-              icon: "mdi-open-in-new",
-              name: "Website",
-            }
           ]
         },
 
@@ -124,15 +139,15 @@ export default {
           name: "Homework Hotline",
           links: [
             {
+              to: "https://afternoon-ocean-24608.herokuapp.com/clients/homework-hotline",
+              icon: "mdi-open-in-new",
+              name: "More information",
+            },
+            {
               to: "https://github.com/homeworkhotline/homeworkhotlineapp",
               icon: "mdi-github",
               name: "Github",
             },
-            {
-              to: "https://afternoon-ocean-24608.herokuapp.com/clients/homework-hotline",
-              icon: "mdi-open-in-new",
-              name: "More information",
-            }
           ]
         },
 
@@ -142,15 +157,15 @@ export default {
           name: "xEffect",
           links: [
             {
+              to: "https://xeffect.herokuapp.com/",
+              icon: "mdi-open-in-new",
+              name: "Demo",
+            },
+            {
               to: "https://github.com/zaviermiller/xeffect",
               icon: "mdi-github",
               name: "Github",
             },
-            {
-              to: "https://xeffect.herokuapp.com/",
-              icon: "mdi-open-in-new",
-              name: "Demo",
-            }
           ]
         },
 

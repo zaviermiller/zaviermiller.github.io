@@ -99,7 +99,7 @@ export default {
 }
 
 .nuxt-content pre, code {
-    background-color: var(--v-background-lighten1) !important;
+    background-color: var(--v-background-darken1) !important;
     font-family: 'JetBrains Mono' !important;
     border-radius: 13px;
     color: #bdbdbd !important;
