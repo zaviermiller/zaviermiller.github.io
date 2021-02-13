@@ -4,7 +4,7 @@ import GithubOutline from "./components/icons/GithubOutline"
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: 'Zavier - %s',
+    titleTemplate: 'Zavier Miller - %s',
     htmlAttrs: {
       lang: 'en'
     },
@@ -67,7 +67,9 @@ export default {
   vuetify: {
     optionsPath: "./plugins/vuetify.js",
     customVariables: ['~/assets/variables.scss'],
-    treeShake: true,
+    treeShake: {
+      components: ["VImg"]
+    },
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

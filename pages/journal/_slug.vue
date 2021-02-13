@@ -39,7 +39,13 @@ export default {
     },
   async mounted() {
     this.startLoading()
-    this.post = await this.$content(this.slug).fetch()
+    try {
+      this.post = await this.$content("journal/" + this.slug).fetch()
+    } catch(e) {
+      if (process.env.NODE_ENV === "development") {
+        this.post = await this.$content("drafts/" + this.slug).fetch()
+      }
+    }
     var pres = await document.getElementsByTagName("pre")
     pres.forEach(pre => {
         pre.classList.add("elevation-12")
@@ -76,7 +82,7 @@ export default {
   }
 
 .nuxt-content > h2 {
-    font-size: 35px;
+    font-size: 38px;
     font-family: 'Chakra Petch';
     font-weight: 500;
 }
@@ -87,31 +93,55 @@ export default {
     font-weight: 500;
 }
 
+.nuxt-content > h3 {
+    font-size: 30px;
+    font-family: 'Chakra Petch';
+    font-weight: 500;
+}
+
 .nuxt-content > p {
-    font-family: 'Aleo';
-    margin-top: 10px;
-    font-size: 17px;
-    color: #d2d2d2;
+  font-family: 'Aleo';
+  margin-top: 10px;
+  font-size: 17px;
+  color: #d2d2d2;
 }
 
 .nuxt-content strong {
-    color: white !important;
+  color: #eee !important;
 }
 
 .nuxt-content pre, code {
-    background-color: var(--v-background-darken1) !important;
-    font-family: 'JetBrains Mono' !important;
-    border-radius: 13px;
-    color: #bdbdbd !important;
-    text-shadow: none;
-    margin: 40px 0;
+  background-color: var(--v-background-darken1) !important;
+  font-family: 'JetBrains Mono' !important;
+  border-radius: 13px;
+  color: #bdbdbd !important;
+  text-shadow: none;
+  margin: 40px 0;
 }
 
 .nuxt-content ul {
   font-family: 'Aleo';
-    margin-top: 10px;
-    font-size: 17px;
-    color: #bdbdbd;
+  margin-top: 10px;
+  font-size: 17px;
+  color: #bdbdbd;
+}
+
+.nuxt-content blockquote {
+  display: inline-block;
+  white-space: pre-line;
+  font-style: italic;
+  font-family: 'Aleo';
+  /* box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important; */
+  border-radius: 13px;
+  border-left: 10px solid var(--v-background-lighten2);
+  padding-left: 30px;
+  margin-bottom: 20px;
+  background-color: #212533;
+
+}
+
+.nuxt-content blockquote p {
+  margin-bottom: 0;
 }
 
 /* TODO: FOOTNOTE */

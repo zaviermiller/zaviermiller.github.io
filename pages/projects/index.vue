@@ -182,13 +182,15 @@ export default {
           ]
         }
       ],
-      featured: []
+      featured: [],
+      otherProjects: []
     }),
     async mounted() {
       if (process.browser) {
-        this.featured = await this.$content("projects").fetch()
-        var slide = await (document.getElementsByClassName("shifted-down"))
-        let timer = await window.setInterval(() => {
+        this.featured = await this.$content("projects/featured").fetch()
+
+        var slide = (document.getElementsByClassName("shifted-down"))
+        let timer = window.setInterval(() => {
           if (!slide.length) {
             clearInterval(timer)
             animStep2()
@@ -199,9 +201,9 @@ export default {
         }, 150)
 
         async function animStep2() {
-          var archive = await document.getElementById("archiveTitle")
+          var archive = document.getElementById("archiveTitle")
           var o = 0
-          timer = await window.setInterval(() => {
+          timer = window.setInterval(() => {
             if (0 >= 1) {
               clearInterval(timer)
               return
@@ -209,8 +211,8 @@ export default {
             o += .1
             archive.style.opacity = o;
           }, 30)
-          var slideLeft = await (document.getElementsByClassName("slide"))
-          timer = await window.setInterval(() => {
+          var slideLeft =  (document.getElementsByClassName("slide"))
+          timer =  window.setInterval(() => {
             if (!slideLeft.length) {
               clearInterval(timer)
               return
@@ -219,7 +221,7 @@ export default {
             el.classList.remove("slide")
           }, 150)
         }
-
+ 
     }
     }
 }
@@ -247,7 +249,7 @@ export default {
       </v-row>
     </v-col>
     <v-col cols="12" class="text-center mt-12">
-      <h1 style="font-family: 'Chakra Petch' !important; color: #ccc; opacity: 0;" class="text-h3 text-md-h2" id="archiveTitle">Archive</h1>
+      <h1 style="font-family: 'Chakra Petch' !important; color: #ccc; opacity: 0;" class="text-h3 text-md-h2 mt-6 mb-12" id="archiveTitle">Other Projects</h1>
     </v-col>
     <ProjectThumbnail v-for="project in archived" :project="project" :key="project.name" class="slide" style="transition: .7s ease-in-out;"/>
   </v-row>

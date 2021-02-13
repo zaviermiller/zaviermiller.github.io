@@ -10,12 +10,13 @@
 <script>
 import BlogPostThumbnail from "@/components/BlogPostThumbnail.vue"
 import ZLoader from '../../components/ZLoader.vue'
+// import { VImg } from "@nuxtjs/vuetify"
 
 import {mapMutations, mapGetters} from "vuex"
 
 export default {
   components: {
-    BlogPostThumbnail,
+    BlogPostThumbnail
   },
   head() {
     return {
@@ -30,7 +31,11 @@ export default {
   created() {
     },
   async mounted() {
-    this.posts = await this.$content().fetch()
+    this.posts = await this.$content("journal").fetch()
+    if (process.env.NODE_ENV === "development") {
+      var drafts = await this.$content("drafts").fetch()
+      this.posts.push(...drafts)
+    }
     this.posts.sort((a, b) => { return new Date(a.created) > new Date(b.created) ? -1 : 1 })
     this.postSlide()
     // this.$emit("loadstop")
