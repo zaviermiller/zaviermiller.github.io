@@ -131,9 +131,9 @@ export default {
   white-space: pre-line;
   font-style: italic;
   font-family: 'Aleo';
-  /* box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important; */
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
   border-radius: 13px;
-  border-left: 10px solid var(--v-background-lighten2);
+  border-left: 10px solid var(--v-primary-darken3);
   padding-left: 30px;
   margin-bottom: 20px;
   background-color: #212533;
