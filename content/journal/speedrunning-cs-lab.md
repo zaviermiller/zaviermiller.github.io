@@ -73,17 +73,17 @@ On my own for this one, no guides. My algorithm is pretty cool, in my opinion. T
 
 That's basically it! It's a little weird whenever the result is 0, but that's simple enough to fix.
 
-With the addition working (and tested pretty thoroughly), I only have the multiplication function!
+With the addition working (and tested pretty thoroughly), I only have the multiplication function left!
 
 ## Multiplication
 
 This one is actually easier than addition, which is nice because I'm tired of thinking about floats.
 
-So for this function, the first thing to do is figure out what the sign of the result will be. This is also _super_ simple because the result sign is just the XOR of the two signs.
+So for this function, the first thing to do is figure out what the sign of the result will be. This is also _super_ simple because the resultant sign is just the XOR of the two signs.
 
-Next up are the exponents, which are also super easy to do. In multiplying exponents, all you have to do is add them together and that is the product. And that's all, only one more step!
+Next up are the exponents, which are also super easy to do. When multiplying exponents, all you have to do is add them together and that is the product. And that's all, only one more step!
 
-The last thing to do is the fraction part, which, again, is super easy. All we have to do is multiply the two fractions, and then since the float is no longer normalized we have to return the result passed into the `Normalize` function. And I did it! Obviously, I had to do a little debugging, but I explained all the major concepts.
+The last thing to do is the fraction part, which, again, is super easy. All we have to do is multiply the two fractions, and then since the float is no longer normalized we have to return the result passed into the `Normalize` function. And I did it! Obviously, I had to do a little debugging, but I explained all the major concepts I had to use in this lab.
 
 ## Conclusion
 
