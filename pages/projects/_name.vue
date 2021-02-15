@@ -34,7 +34,7 @@ export default {
     },
     async mounted() {
       this.startLoading()
-      this.project = await this.$content("projects/" + this.name).fetch()
+      this.project = await this.$content("projects/featured/" + this.name).fetch()
       var baseLogo = this.logos[this.project.slug]
       this.logoArr = baseLogo.split("\n")
       this.logo = "\n".repeat(this.logoArr.length - 1)
