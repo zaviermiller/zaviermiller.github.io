@@ -53,6 +53,10 @@ export default {
       }, 500)
     }
   },
+  beforeDestroy() {
+    var app = document.getElementsByClassName("v-application")[0]
+    app.classList.remove("crt")
+  },
   computed: {
     options() {
       return {
@@ -74,6 +78,9 @@ export default {
     ...mapMutations({startLoading: "load/startLoading"}),
     ...mapMutations({stopLoading: "load/stopLoading"}),
     async initAnim() {
+      var app = document.getElementsByClassName("v-application")[0]
+      app.classList.add("crt")
+
       this.showJournal = Math.random() > .5
       var tmp = await document.getElementsByClassName("slideUp")
       tmp.forEach(s => { s.classList.add("slideY"); console.log(s) })
