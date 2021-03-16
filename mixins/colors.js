@@ -2,7 +2,7 @@ export const computedColors = {
     computed: {
         colors() {
             return {
-                coding: 'light-blue',
+                code: 'light-blue',
                 personal: 'text--accent-3 green',
                 school: 'deep-purple',
                 ML: 'deep-orange'
