@@ -36,7 +36,7 @@ export default {
       var drafts = await this.$content("drafts").fetch()
       this.posts.push(...drafts)
     }
-    this.posts.sort((a, b) => { return Date.parse(a.created) > Date.parse(b.created) ? -1 : 1 })
+    this.posts.sort((a, b) => { return Date.parse(a.date) > Date.parse(b.date) ? -1 : 1 })
     this.postSlide()
     // this.$emit("loadstop")
   },

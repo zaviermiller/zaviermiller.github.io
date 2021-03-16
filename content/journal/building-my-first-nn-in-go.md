@@ -3,6 +3,7 @@
 title: Building My First NN in Go
 
 created: 02-03-21
+date: February 3, 2021
 
 category: ML
 

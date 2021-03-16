@@ -2,6 +2,7 @@
 title: Speedrunning an Extra-Credit CS Lab
 
 created: 02-12-21
+date: February 12, 2021
 
 category: school
 ---

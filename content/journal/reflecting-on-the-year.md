@@ -3,6 +3,7 @@
 title: Reflecting on the Year
 
 created: 01-01-21
+date: January 1, 2021
 
 category: personal
 

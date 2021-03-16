@@ -6,7 +6,7 @@
         </NuxtLink>
         <template v-if="$vuetify.breakpoint.mdAndUp">
             <span class="text-subtitle-1 grey--text" style="font-family: 'JetBrains Mono' !important;">{{dots}} </span>
-            <span class="text-subtitle-1" style="font-family: 'JetBrains Mono' !important;">{{post.created}}</span>
+            <span class="text-subtitle-1" style="font-family: 'JetBrains Mono' !important;">{{this.post.created}}</span>
         </template>
   </v-col>
 </template>
