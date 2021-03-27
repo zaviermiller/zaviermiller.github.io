@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/boids", {data:[{}],fetch:[],mutations:[]});
