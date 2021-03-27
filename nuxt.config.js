@@ -44,6 +44,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/google-analytics'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -70,6 +71,10 @@ export default {
     treeShake: {
       components: ["VImg"]
     },
+  },
+
+  googleAnalytics: {
+    id: "UA-142284814-3"
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
