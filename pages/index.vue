@@ -1,11 +1,12 @@
 <script>
 import Boids from '../components/Boids.vue'
+import Contour from '../components/Contour.vue'
 // import initMetaballs from "metaballs-js";
 
 import { mapMutations } from "vuex"
 
 export default {
-  components: { Boids },
+  components: { Boids, Contour },
   head() {
     return {
       title: "Home",
@@ -43,7 +44,7 @@ export default {
       ]
     }
   },
-  created() {
+  mounted() {
     if (process.browser) {
       this.startLoading()
       setTimeout(() => {
@@ -60,8 +61,6 @@ export default {
   computed: {
     options() {
       return {
-        numMetaballs: 20,
-        minRadius: 10,
         maxRadius: 25,
         speed: 6.0,
         color: '#cccccc00',
@@ -77,19 +76,19 @@ export default {
   methods: {
     ...mapMutations({startLoading: "load/startLoading"}),
     ...mapMutations({stopLoading: "load/stopLoading"}),
-    async initAnim() {
+    initAnim() {
       var app = document.getElementsByClassName("v-application")[0]
       app.classList.add("crt")
 
       this.showJournal = Math.random() > .5
-      var tmp = await document.getElementsByClassName("slideUp")
-      tmp.forEach(s => { s.classList.add("slideY"); console.log(s) })
+      var tmp = document.querySelectorAll(".slideUp")
+      tmp?.forEach(s => { s.classList.add("slideY"); console.log(s) })
 
       // initMetaballs(this.$refs.metaball, this.options)
 
       // animation
-      var slide = await (document.getElementsByClassName("slide"))
-      var btns = await document.getElementsByClassName("slideY")
+      var slide = (document.getElementsByClassName("slide"))
+      var btns = document.querySelectorAll(".slideY")
       let timer = window.setInterval(() => {
         if (!slide.length) {
           clearInterval(timer)
@@ -111,8 +110,8 @@ export default {
 </script>
 
 <template>
-<div v-if="!localLoad">
-    <boids :num="computedNum">
+<div v-if="!localLoad" style="overflow: clip;">
+    <contour />
       <template>
     <!-- <canvas ref="metaball" style="position: absolute; width: 100%; left: 0; height: 100%; top: 0;" ></canvas> -->
     <v-row :class="`justify-center ${ $vuetify.breakpoint.smAndDown ? '' : 'pl-12'} noselect`">
@@ -121,7 +120,7 @@ export default {
           <span style="font-family: 'Inter' !important; letter-spacing: -.05em !important; font-weight: 600;" class="text-h2 text-sm-h1 heading slide">Zavier Miller</span>
         </p>
         <p class="mb-md-12">
-          <span style="font-family: 'Chakra Petch' !important;" class="text-h5 text-sm-h3 grey--text text--lighten-2 subheading slide">software developer and student</span>
+          <span style="font-family: 'Chakra Petch' !important;" class="text-h5 text-sm-h3 grey--text text--lighten-4 subheading slide">software developer and student</span>
         </p>
         <transition v-if="$vuetify.breakpoint.smAndUp" name="glitch">
           <v-btn outlined class="slideUp canvasContent" style="text-transform: none !important; font-family: 'JetBrains Mono'; background-color: var(--v-background-base) !important; " tile color="primary" to="/projects" :ripple="false" v-if="!showJournal" data-text="Check out what I'm building" :key="'building'" nuxt>Check out what I'm building</v-btn>
@@ -160,7 +159,6 @@ export default {
       </v-col>
     </v-row>
       </template>
-    </boids>
   </div>
 </template>
 
@@ -346,6 +344,12 @@ export default {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.canvasContent {
+  background: rgb(26,28,39);
+  background: radial-gradient(circle, rgba(26,28,39,1) 93%, rgba(0,0,0,0) 100%);
+  padding: 10px 30px;
 }
 
 </style>

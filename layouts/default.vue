@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <AppBar v-if="!loading" />
-    <v-main class="mx-md-12 px-md-12" style="overflow-x: hidden;">
+    <v-main class="mx-md-12 px-md-12 my-md-6" style="overflow-x: hidden;">
       <v-container fluid>
         <v-fade-transition hide-on-leave>
           <nuxt v-show="!loading" :key="$route.fullPath"/>
@@ -208,7 +208,7 @@ html {
   left: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 30%, rgba(26,29,40,.6) 70%);
+  background: linear-gradient(rgba(18, 16, 16, 0) 30%, rgba(26,29,40,.6) 80%);
   z-index: 2;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
