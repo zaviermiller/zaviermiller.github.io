@@ -1,7 +1,27 @@
 export const featuredLogos = {
-    computed: {
-        zenLogo() {
-            return `
+  computed: {
+    receiptComponentsLogo() {
+      return `
+            ___              _      __          
+           / _ \\___ _______ (_)__  / /_         
+          / , _/ -_) __/ -_) / _ \\/ __/         
+  _____  /_/|_|\\__/\\__/\\__/_/ .__/\\__/    __    
+ / ___/__  __ _  ___  ___  /_/  ___ ___  / /____
+/ /__/ _ \\/  ' \\/ _ \\/ _ \\/ _ \\/ -_) _ \\/ __(_-<
+\\___/\\___/_/_/_/ .__/\\___/_//_/\\__/_//_/\\__/___/
+              /_/                               `
+    },
+    receiptComponentsThumbLogo() {
+      return `
+
+       ___  _____
+      / _ \\/ ___/
+     / , _/ /__  
+    /_/|_|\\___/  
+                 `
+    },
+    zenLogo() {
+      return `
 
      ____         
     /_  / ___ ___ 
@@ -11,25 +31,25 @@ export const featuredLogos = {
  
  
             `
-        },
-        zenPageLogo() {
-            return `
+    },
+    zenPageLogo() {
+      return `
  ____         
 /_  / ___ ___ 
  / /_/ -_) _ \\
 /___/\\__/_//_/
 `
-        },
-        zenPageMobileLogo() {
-          return `
+    },
+    zenPageMobileLogo() {
+      return `
    ____         
   /_  / ___ ___ 
    / /_/ -_) _ \\     
   /___/\\__/_//_/
           `
-        },
-        raiLogo() {
-            return `
+    },
+    raiLogo() {
+      return `
              ,wpKKKbbKKKpw,             
          ,pKPPPPPPPPPPPPPPPPKp          
        ,#PPPPPK*"\`\`,,\`\`"*KPPPPPKp       
@@ -49,9 +69,9 @@ export const featuredLogos = {
             
                  
 `
-        },
-        bdLogo() {
-            return `
+    },
+    bdLogo() {
+      return `
         
         ;gKKMMMMMMMMMMMMMMMRKKWp
       ;KK*                    *0Kp
@@ -67,9 +87,9 @@ KM      JKN      KMYYYK      ]KH      ]KH
          KN       yKKw       ]KH
           VKNwwg#K    KNmuuuKR*
                  \`\`--\`\``
-        },
-        zimaLogo() {
-          return `
+    },
+    zimaLogo() {
+      return `
 
 
   ____    __ __  ___ 
@@ -77,29 +97,32 @@ KM      JKN      KMYYYK      ]KH      ]KH
   / / |_||     ||   |
  /___||_||_|_|_||_|_|
  `
-        },
-        logos() {
-            return {
-              "zen": this.zenPageLogo,
-              "zima": this.zimaLogo,
-              "resale-ai": this.raiLogo,
-              "blind-dog": this.bdLogo
-            }
-        },
-        mobileLogos() {
-          return {
-            "zen": this.zenPageMobileLogo,
-            "resale-ai": this.raiLogo,
-            "blind-dog": this.bdLogo
-          }
-        },
-        thumbLogos() {
-            return {
-              "zen": this.zenLogo,
-              "zima": this.zimaLogo,
-              "resale-ai": this.raiLogo,
-              "blind-dog": this.bdLogo
-            }
-        }
     },
+    logos() {
+      return {
+        "receipt-components": this.receiptComponentsLogo,
+        zen: this.zenPageLogo,
+        zima: this.zimaLogo,
+        "resale-ai": this.raiLogo,
+        "blind-dog": this.bdLogo,
+      }
+    },
+    mobileLogos() {
+      return {
+        "receipt-components": this.receiptComponentsLogo,
+        zen: this.zenPageMobileLogo,
+        "resale-ai": this.raiLogo,
+        "blind-dog": this.bdLogo,
+      }
+    },
+    thumbLogos() {
+      return {
+        "receipt-components": this.receiptComponentsThumbLogo,
+        zen: this.zenLogo,
+        zima: this.zimaLogo,
+        "resale-ai": this.raiLogo,
+        "blind-dog": this.bdLogo,
+      }
+    },
+  },
 }

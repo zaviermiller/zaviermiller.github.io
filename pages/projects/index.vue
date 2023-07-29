@@ -14,6 +14,44 @@ export default {
   data: () => ({
     selectedProject: null,
     archived: [
+      {
+        language: "React",
+        name: "H4I - CCAHT",
+        links: [
+          {
+            to: "https://github.com/hack4impact-utk/community-coalition-against-human-trafficking",
+            icon: "mdi-github",
+            name: "Github",
+          },
+        ],
+      },
+      {
+        language: "C",
+        name: "Webserver",
+        links: [
+          {
+            to: "https://github.com/zaviermiller/c-webserver",
+            icon: "mdi-github",
+            name: "Github",
+          },
+        ],
+      },
+      {
+        language: "TypeScript",
+        name: "Graph Visualizer",
+        links: [
+          {
+            to: "https://utk.zaviermiller.com/graph-vis/",
+            icon: "mdi-open-in-new",
+            name: "Demo",
+          },
+          {
+            to: "https://github.com/zaviermiller/graph-vis",
+            icon: "mdi-github",
+            name: "Github",
+          },
+        ],
+      },
       // Zephyr
       {
         language: "Go",
@@ -255,7 +293,7 @@ export default {
             >
               <v-responsive :aspect-ratio="1">
                 <v-card-text
-                  :style="`height: 300px; width:300px; white-space: pre; font-family: 'JetBrains Mono' !important; ${
+                  :style="`height: 300px; width:300px; white-space: pre; font-family: 'JetBrains Mono' !important; text=align: center;${
                     project.thumbSize
                   } transition: .3s ease-out; ${
                     hover
