@@ -44,7 +44,7 @@ export default {
       this.posts.push(...drafts)
     }
     this.posts.sort((a, b) => {
-      return Date.parse(a.date) > Date.parse(b.date) ? -1 : 1
+      return Date.parse(b.created) - Date.parse(a.created)
     })
     this.postSlide()
     // this.$emit("loadstop")

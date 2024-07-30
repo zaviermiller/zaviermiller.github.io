@@ -140,6 +140,26 @@ export default {
   color: #eee !important;
 }
 
+.nuxt-content ol {
+  font-family: "Aleo";
+  margin-top: 10px;
+  font-size: 17px;
+  color: #bdbdbd;
+  margin-left: 20px;
+}
+
+.nuxt-content ul {
+  font-family: "Aleo";
+  margin-top: 10px;
+  font-size: 17px;
+  color: #bdbdbd;
+  margin-left: 20px;
+}
+
+.nuxt-content li {
+  margin-bottom: 5px;
+}
+
 .nuxt-content pre,
 code {
   background-color: var(--v-background-darken1) !important;
@@ -149,13 +169,6 @@ code {
   text-shadow: none;
   margin: 40px 0;
   font-size: 20px;
-}
-
-.nuxt-content ul {
-  font-family: "Aleo";
-  margin-top: 10px;
-  font-size: 17px;
-  color: #bdbdbd;
 }
 
 .nuxt-content blockquote {
