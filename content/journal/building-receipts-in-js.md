@@ -18,6 +18,8 @@ To solve this problem, we needed a library capable of two things:
 
 While there are definitely many JavaScript libraries we can use to accomplish #1, we needed the ability to render the receipts into both HTML and raw ESC/POS commands. After some research, we decided to build our own library to accomplish this. Let's take a look at how you can use our library to build your own receipts.
 
+There's a guide below, but check it out on [GitHub](https://www.github.com/resaleai/receipt-components)!
+
 ## Getting Started
 
 First, you'll need to install the package from npm:
